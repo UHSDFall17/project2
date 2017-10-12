@@ -15,10 +15,23 @@ public class RegistrationForm
 		registrationInfo = new UserRegistrationInfo(); 
 	}
 
+	public RegistrationForm(EventInfo eventInfo) 
+	{
+		registrationInfo = new UserRegistrationInfo();
+		this.eventInfo = eventInfo;
+	}
+
+	public void setEventInfo(EventInfo eventInfo)
+	{
+		this.eventInfo = eventInfo;
+	}
+
 	public int createEventTicket(TicketType ticketType, int ticketQuantity)
 	{
 		if(!registrationInfo.isConfirmed)
 			return -1;
+		if(eventInfo == null)
+			return -2;
 		String clientFullName = registrationInfo.firstName + " " + registrationInfo.lastName;
 		eventTicket = new EventTicket(clientFullName, ticketType,
 									  ticketQuantity, eventInfo.getePrice());
@@ -68,7 +81,7 @@ public class RegistrationForm
 
 		private boolean setCellPhone(String newCellPhone) 
 		{
-			// 1234567890, 123-456-7890, (123)456-7890 or (123)4567890 are the accepted format
+			// 1234567890, 123-456-7890, (123)456-7890 or (123)4567890 are the accepted format.
 			final String PHONE_REGEX = "\\d{10}|(?:\\d{3}-){2}\\d{4}|\\(\\d{3}\\)\\d{3}-?\\d{4}";
 			if (newCellPhone.matches(PHONE_REGEX)) 
 			{

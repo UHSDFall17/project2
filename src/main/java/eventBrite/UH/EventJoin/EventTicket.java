@@ -19,8 +19,13 @@ public class EventTicket
 	}
 
 	// approveTicket should be accessible only to the Event owner/ organizer
-	public void approveTicket() {ticketInfo.isPendingTicket = false;} 
-	public boolean isApproved() {return !ticketInfo.isPendingTicket;}
+	public void 		approveTicket() 	{ticketInfo.isPendingTicket = false;} 
+	public boolean 		isApproved() 		{return !ticketInfo.isPendingTicket;}
+
+	public int 			getTicketQuantity() {return ticketQuantity;}
+	public float 		getTicketCover() 	{return ticketInfo.ticketCover;}
+	public String		getClientFullName()	{return ticketInfo.clientFullName;}
+	public TicketType	getTicketType()		{return ticketInfo.ticketType;}
 
 	private static class TicketInfo
 	{
@@ -39,10 +44,7 @@ public class EventTicket
 
 		private int setTicketCover(float newCover)
 		{
-			if(newCover <= 0)
-				return -1;
-
-			ticketCover = newCover;
+			ticketCover = (newCover > 0) ? newCover : 0;
 			return 0;
 		}
 	}
