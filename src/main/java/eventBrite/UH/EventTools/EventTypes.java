@@ -19,6 +19,21 @@ public class EventTypes
 			return name;
 		}
 	}
+
+	public enum Return
+	{
+		SUCCESS(1),
+		GENERALERROR(0);
+
+		private int code;
+
+		Return(int code) {
+			this.code = code;
+		}
+
+		public int getcode() {return code;}
+
+	}
 }
 
 

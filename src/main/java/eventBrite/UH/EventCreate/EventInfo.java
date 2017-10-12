@@ -1,10 +1,13 @@
 package eventBrite.UH.EventCreate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import eventBrite.UH.EventTools.EventTypes;
 
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -36,7 +39,7 @@ public class EventInfo {
         eReserved = 0;
     }
 
-    /*public int SetEventInfos(
+    public int SetEventInfos(
             String eTitle,
             String eLocation,
             Date eStart,
@@ -58,9 +61,9 @@ public class EventInfo {
         this.eReserved = eReserved;
 
         return 1;
-    }*/
+    }
 
-    public int saveEvent() throws Exception
+    public EventTypes.Return saveEvent() throws Exception
     {
         ObjectMapper mapper = new ObjectMapper();
 
@@ -73,7 +76,7 @@ public class EventInfo {
         //Object to JSON in String
         //String jsonInString = mapper.writeValueAsString(obj);
 
-        return 1;
+        return EventTypes.Return.SUCCESS;
     }
 
     public void seteTitle(String eTitle) {
@@ -84,12 +87,19 @@ public class EventInfo {
         this.eLocation = eLocation;
     }
 
-    public void seteStart(Date eStart) {
-        this.eStart = eStart;
+    public void seteStart(String eStart) throws ParseException {
+
+        SimpleDateFormat formatIn = new SimpleDateFormat("MM/dd/yy - HH:mm");
+
+        Date dateIn = formatIn.parse(eStart);
+        this.eStart = dateIn;
     }
 
-    public void seteEnd(Date eEnd) {
-        this.eEnd = eEnd;
+    public void seteEnd(String eEnd) throws ParseException {
+        SimpleDateFormat formatIn = new SimpleDateFormat("MM/dd/yy - HH:mm");
+
+        Date dateIn = formatIn.parse(eEnd);
+        this.eEnd = dateIn;
     }
 
     public void seteDescription(String eDescription) {
@@ -108,11 +118,11 @@ public class EventInfo {
         this.eAvailable = eAvailable;
     }
 
-    public void addeReserved(int eReserved) {
+    public void addeReserved() {
         this.eReserved ++;
     }
 
-    public void subeReserved(int eReserved) {
+    public void subeReserved() {
         this.eReserved --;
     }
 
@@ -128,12 +138,12 @@ public class EventInfo {
         return eLocation;
     }
 
-    public Date geteStart() {
-        return eStart;
+    public String geteStart() {
+        return new SimpleDateFormat("MM/dd/yy - HH:mm").format(eStart);
     }
 
-    public Date geteEnd() {
-        return eEnd;
+    public String geteEnd() {
+        return new SimpleDateFormat("MM/dd/yy - HH:mm").format(eEnd);
     }
 
     public String geteDescription() {
