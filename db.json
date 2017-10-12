@@ -1,2 +1,4 @@
 {"eTitle":"hello raafat","eLocation":"uh","eStart":1514656800000,"eEnd":1514829600000,"eDescription":"event for raafat","eOrgName":"raafat","eOrgDesc":"raafat the event organizer","ePrice":100.0,"eAvailable":20,"eReserved":0}
 {"eTitle":"hello nour","eLocation":"uh","eStart":1514649600000,"eEnd":1514822400000,"eDescription":"this is an event for nour","eOrgName":"nour","eOrgDesc":"nour the event organizer","ePrice":100.75,"eAvailable":20,"eReserved":0}
+{"eTitle":"event3","eLocation":"UH","eStart":"10/01/17 - 10:00","eEnd":"10/02/17 - 10:00","eDescription":"hello event1","eOrgName":"org3","eOrgDesc":"org3 desc","ePrice":100.0,"eAvailable":20,"eReserved":0}
+{"eTitle":"","eLocation":"","eStart":"10/12/17 - 17:08","eEnd":"10/12/17 - 17:08","eDescription":"","eOrgName":"","eOrgDesc":"","ePrice":0.0,"eAvailable":0,"eReserved":0}

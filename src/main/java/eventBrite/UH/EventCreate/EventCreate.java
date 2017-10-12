@@ -1,5 +1,7 @@
 package eventBrite.UH.EventCreate;
 
+import eventBrite.UH.EventTools.EventTypes;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
@@ -12,7 +14,7 @@ public class EventCreate {
     {
         this.sc=sc;
     }
-    public int createEvent()
+    public EventTypes.Return createEvent()
     {
 
         String strIn;
@@ -34,20 +36,12 @@ public class EventCreate {
             //start date
             System.out.println("Input the start date of the event MM/dd/yy - HH:mm");
             strIn=readLine(sc);
-
-            formatIn = new SimpleDateFormat("MM/dd/yy - HH:mm");
-
-            dateIn = formatIn.parse(strIn);
-            eInfo.seteStart(dateIn);
+            eInfo.seteStart(strIn);
 
             // end date
             System.out.println("Input the end date of the event MM/dd/yy - HH:mm");
             strIn=readLine(sc);
-
-            formatIn = new SimpleDateFormat("MM/dd/yy - HH:mm");
-
-            dateIn = formatIn.parse(strIn);
-            eInfo.seteEnd(dateIn);
+            eInfo.seteEnd(strIn);
 
             //event description
             System.out.println("Input the event description");
@@ -72,26 +66,23 @@ public class EventCreate {
             fltIn=Float.parseFloat(readLine(sc));
             eInfo.setePrice(fltIn);
 
+            eInfo.saveEvent();
+
         }catch (Exception e)
         {
             System.out.println(e.toString());
-            return 0;
+            return EventTypes.Return.GENERALERROR;
         }
 
-        try {
-            eInfo.saveEvent();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-        return 1;
+        return EventTypes.Return.SUCCESS;
     }
 
     public String readLine(Scanner sc) throws EmptyStringException
     {
         String strIn=sc.nextLine();
         EmptyStringException e = new EmptyStringException();
-        if(strIn.isEmpty())
+        if(strIn.isEmpty() || strIn.equals(""))
         {
             throw e;
         }
