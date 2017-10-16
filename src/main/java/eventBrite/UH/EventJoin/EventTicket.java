@@ -1,19 +1,26 @@
 package eventBrite.UH.EventJoin;
 
+import eventBrite.UH.EventTools.EventTypes.TicketType;
+
 public class EventTicket
 {
-	private TicketInfo				ticketInfo;
 	private int						ticketQuantity;
-	// private EventInfo				eventInfo;
+	private TicketInfo				ticketInfo;
 
-	public EventTicket(String clientFullName, TicketType ticketType, int quantity)
+	public EventTicket(
+		String 		clientFullName, 
+		TicketType 	ticketType, 
+		int 		quantity, 
+		float 		newCover)
 	{
 		ticketInfo = new TicketInfo(clientFullName, ticketType);
-		// ticketInfo.setTicketCover(newCover):newCover from eventInfo
-		ticketQuantity = (quantity > 0) ? quantity : 0;
+		ticketInfo.setTicketCover(newCover);
+		ticketQuantity = (quantity > 0) ? quantity : 1;
 	}
 
+	// approveTicket should be accessible only to the Event owner/ organizer
 	public void approveTicket() {ticketInfo.isPendingTicket = false;} 
+	public boolean isApproved() {return !ticketInfo.isPendingTicket;}
 
 	private static class TicketInfo
 	{
@@ -30,31 +37,13 @@ public class EventTicket
 			ticketCover 				= -1;
 		}
 
-		private boolean setTicketCover(float newCover)
+		private int setTicketCover(float newCover)
 		{
-			if(newCover < 0)
-				return false;
+			if(newCover <= 0)
+				return -1;
 
 			ticketCover = newCover;
-			return true;
-		}
-	}
-
-	public enum TicketType 
-	{
-		GA("General Access"),
-		VIP("Very Important Person");
-		
-		private String name = "";
-
-		TicketType(String name)
-		{
-			this.name = name;
-		}
-
-		public String toString()
-		{
-			return name;
+			return 0;
 		}
 	}
 }

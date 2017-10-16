@@ -1,15 +1,28 @@
 package eventBrite.UH.EventJoin;
 
+import eventBrite.UH.EventCreate.EventInfo;
+import eventBrite.UH.EventTools.MailNotifier;
+import eventBrite.UH.EventTools.EventTypes.TicketType;
+
 public class RegistrationForm  
 {
 	private UserRegistrationInfo 	registrationInfo;
-	/*These classes are not imlemented yet*/
-	// private EventInfo				eventInfo;
-	// private TicketInfo				ticketInfo;
+	private EventTicket				eventTicket;
+	private EventInfo				eventInfo;
 
 	public RegistrationForm() 
 	{
 		registrationInfo = new UserRegistrationInfo(); 
+	}
+
+	public int createEventTicket(TicketType ticketType, int ticketQuantity)
+	{
+		if(!registrationInfo.isConfirmed)
+			return -1;
+		String clientFullName = registrationInfo.firstName + " " + registrationInfo.lastName;
+		eventTicket = new EventTicket(clientFullName, ticketType,
+									  ticketQuantity, eventInfo.getePrice());
+		return 0;
 	}
 
 	public int setUserRegistrationInfo(
@@ -24,6 +37,7 @@ public class RegistrationForm
 		if(!registrationInfo.setEmailAddress(emailAddress)) return -1;
 		if(!confirmEmailAddress(emailConfirm))				return -2;
 		if(!registrationInfo.setCellPhone(cellPhone)) 		return -3;
+		registrationInfo.isConfirmed = true;
 		return 0;
 	}
 
@@ -38,19 +52,18 @@ public class RegistrationForm
 		private String	lastName;
 		private String	emailAddress;
 		private String 	cellPhone;
+		private Boolean isConfirmed;
 		// birthday Not necessary now
 
-		public UserRegistrationInfo() {}
+		public UserRegistrationInfo() {isConfirmed = false;}
 
 		private boolean setEmailAddress(String newEmailAddress) 
 		{
-			final String EMAIL_REGEX = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
-			if (newEmailAddress.matches(EMAIL_REGEX)) 
-			{
-			 	emailAddress = newEmailAddress;
-			 	return true;
-			} 
-			return false;
+			boolean ret;
+			ret = MailNotifier.checkEmailAddressFormat(newEmailAddress);
+			if (ret)
+				emailAddress = newEmailAddress;
+			return ret;
 		}
 
 		private boolean setCellPhone(String newCellPhone) 
@@ -64,6 +77,5 @@ public class RegistrationForm
 			} 
 			return false;
 		}
-
 	}
 }
