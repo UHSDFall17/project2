@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# install mysql server
+
+sudo apt-get update
+
+echo ""
+echo "please set the root password to Project2!"
+echo ""
+
+sleep 2
+
+sudo apt-get install mysql-server
+
+# start mysql server
+
+sudo service mysql start
+
+# set to start on boot
+
+sudo /usr/sbin/update-rc.d mysql defaults
