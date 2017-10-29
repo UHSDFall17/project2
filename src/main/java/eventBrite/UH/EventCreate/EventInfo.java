@@ -42,21 +42,23 @@ public class EventInfo {
     public int SetEventInfos(
             String eTitle,
             String eLocation,
-            Date eStart,
-            Date eEnd,
+            String eStart,
+            String eEnd,
             String eDescription,
             String eOrgName,
             String eOrgDesc,
+            float ePrice,
             int eAvailable,
             int eReserved)
     {
         this.eTitle = eTitle;
         this.eLocation = eLocation;
-        this.eStart = eStart;
-        this.eEnd = eEnd;
+        //this.eStart = eStart;
+        //this.eEnd = eEnd;
         this.eDescription = eDescription;
         this.eOrgName = eOrgName;
         this.eOrgDesc = eOrgDesc;
+        this.ePrice = ePrice;
         this.eAvailable = eAvailable;
         this.eReserved = eReserved;
 

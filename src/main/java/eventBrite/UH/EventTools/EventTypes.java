@@ -24,12 +24,20 @@ public class EventTypes
 	{
 		GENERALERROR		(0, "General Error"),
 		SUCCESS 			(1, "Success"),
+
+		// return codes for mail notifier 2-10
 		EEMAILFORMAT 		(2, "Wrong Email Format"),
 		EGMAILFORMAT 		(3, "Wrong Gmail Format"),
-		EPHONEFORMAT 		(4, "Wrong Phone Format"),
-		EEMAILMATCH 		(5, "Mails don't match"),
-		EPASSWDMATCH 		(6, "Passwords don't match"),
-		EXCEPTIONRAISED 	(7, "Exception Raised");
+		EEMAILMATCH 		(4, "Mails don't match"),
+		// return codes for user account 11-20
+		EPASSWDMATCH 		(11, "Passwords don't match"),
+		//return codes for database handler 21-30
+		CONNECTIONFAILED	(21, "Connection failed"),
+		SELECTFAILED		(22, "Select from table failed"),
+		EVENTNOTFOUND		(21, "event not found"),
+		// return codes for general usage 100:
+		EXCEPTIONRAISED 	(7, "Exception Raised"),
+		EPHONEFORMAT 		(5, "Wrong Phone Format");
 
 		private int 	code;
 		private String 	description;
