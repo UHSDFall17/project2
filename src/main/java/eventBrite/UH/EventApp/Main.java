@@ -1,6 +1,9 @@
 package eventBrite.UH.EventApp;
 
+import eventBrite.UH.DatabaseManager.DBEventInfo;
 import eventBrite.UH.EventCreate.EventCreate;
+import eventBrite.UH.EventCreate.EventInfo;
+import eventBrite.UH.EventTools.EventTypes;
 import eventBrite.UH.UserLogin.UserLogin;
 
 import java.util.ArrayList;
@@ -44,7 +47,6 @@ public class Main {
                 eCreate.createEvent();
                 break;
         }
-
 
 
 

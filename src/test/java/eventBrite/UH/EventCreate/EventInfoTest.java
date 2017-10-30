@@ -35,11 +35,9 @@ public class EventInfoTest {
     public void testSaveEvent() throws Exception
     {
         int ret = 0;
-        ret = eventInfo.SetEventInfos("event1","UH",
-                new SimpleDateFormat("MM/dd/yy - HH:mm").parse("01/02/17 - 10:00"),
-                new SimpleDateFormat("MM/dd/yy - HH:mm").parse("01/03/17 - 10:00"),
-                "this is event1","org1","org1 desc",20,
-                0);
+        ret = eventInfo.SetEventInfos("event1","UH","01/02/17 - 10:00",
+                "01/03/17 - 10:00","this is event1","org1","org1 desc",
+                20,0,0);
         assertEquals(1, ret);
     }
 

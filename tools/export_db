@@ -1,0 +1,5 @@
+#!/bin/bash
+
+sudo cp -rf /var/lib/mysql/project2 ../
+
+sudo chown -R $USER:$USER ../project2
