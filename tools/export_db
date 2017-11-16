@@ -1,5 +1,10 @@
 #!/bin/bash
 
-sudo cp -rf /var/lib/mysql/project2 ../
+sudo cp -rf /var/lib/mysql/project2 ../database/
+sudo cp /var/lib/mysql/ib_buffer_pool ../database/
+sudo cp /var/lib/mysql/ibdata1 ../database/
+sudo cp /var/lib/mysql/ib_logfile0 ../database/
+sudo cp /var/lib/mysql/ib_logfile1 ../database/
+sudo cp /var/lib/mysql/ibtmp1 ../database/
 
-sudo chown -R $USER:$USER ../project2
+sudo chown -R $USER:$USER ../database
