@@ -43,8 +43,8 @@ public class Main {
             case "create event":
                 System.out.println("you started "+featureList.get(select));
                 // instantiate and call feature class here
-                EventCreate eCreate = new EventCreate(selectFeature);
-                eCreate.createEvent();
+                //EventCreate eCreate = new EventCreate(selectFeature);
+                //eCreate.createEvent();
                 break;
         }
 
