@@ -1,8 +1,8 @@
-package eventBrite.UH.EventJoin;
+package eventBrite.UH.EventManager;
 
 import eventBrite.UH.EventTools.EventTypes.TicketType;
 
-public class EventTicket
+class EventTicket
 {
 	private int						ticketQuantity;
 	private TicketInfo				ticketInfo;

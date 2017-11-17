@@ -1,6 +1,6 @@
 package eventBrite.UH.DatabaseManager;
 
-import eventBrite.UH.EventCreate.EventInfo;
+import eventBrite.UH.EventManager.EventInfo;
 import eventBrite.UH.EventTools.EventTypes;
 
 import java.sql.*;

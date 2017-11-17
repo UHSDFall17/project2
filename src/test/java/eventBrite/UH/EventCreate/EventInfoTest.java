@@ -1,4 +1,4 @@
-package eventBrite.UH.EventCreate;
+package eventBrite.UH.EventManager;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import eventBrite.UH.EventTools.EventTypes;

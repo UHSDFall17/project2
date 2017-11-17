@@ -1,4 +1,4 @@
-package eventBrite.UH.EventCreate;
+package eventBrite.UH.EventManager;
 
 import eventBrite.UH.EventTools.EventTypes;
 import org.junit.After;

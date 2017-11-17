@@ -1,4 +1,4 @@
-package eventBrite.UH.EventCreate;
+package eventBrite.UH.EventManager;
 
 public class EmptyStringException extends Exception {
 

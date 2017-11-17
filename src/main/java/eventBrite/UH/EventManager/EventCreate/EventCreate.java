@@ -1,4 +1,4 @@
-package eventBrite.UH.EventCreate;
+package eventBrite.UH.EventManager;
 
 import eventBrite.UH.EventTools.EventTypes;
 
@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
-public class EventCreate {
+class EventCreate {
 
 
 

@@ -1,4 +1,4 @@
-package eventBrite.UH.EventJoin;
+package eventBrite.UH.EventManager;
 
 import org.junit.After;
 import org.junit.Before;
