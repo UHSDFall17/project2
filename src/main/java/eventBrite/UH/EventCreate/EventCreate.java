@@ -8,14 +8,21 @@ import java.util.Scanner;
 
 public class EventCreate {
 
-    private EventInfo eInfo = new EventInfo();
-    private Scanner sc;
-    public EventCreate(Scanner sc)
-    {
-        this.sc=sc;
+
+
+    private static EventCreate ec = new EventCreate();
+
+    private EventCreate() {}
+
+
+    public static EventCreate getInstance( ) {
+        return ec;
     }
+
     public EventTypes.Return createEvent()
     {
+        EventInfo eInfo = new EventInfo();
+        Scanner sc = new Scanner(System.in);
 
         String strIn;
         Date dateIn;
@@ -53,10 +60,6 @@ public class EventCreate {
             strIn=readLine(sc);
             eInfo.seteOrgName(strIn);
 
-            //organizer description
-            System.out.println("Input the organizer description");
-            strIn=readLine(sc);
-            eInfo.seteOrgDesc(strIn);
 
             System.out.println("Input the event available spots (-1 means unlimited spots)");
             intIn=Integer.parseInt(readLine(sc));
@@ -78,7 +81,7 @@ public class EventCreate {
         return EventTypes.Return.SUCCESS;
     }
 
-    public String readLine(Scanner sc) throws EmptyStringException
+    private String readLine(Scanner sc) throws EmptyStringException
     {
         String strIn=sc.nextLine();
         EmptyStringException e = new EmptyStringException();
