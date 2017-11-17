@@ -20,7 +20,6 @@ public class EventInfo {
     private Date eEnd;
     private String eDescription;
     private String eOrgName;
-    private String eOrgDesc;
     private float ePrice;
     private int eAvailable;
     private int eReserved;
@@ -33,7 +32,6 @@ public class EventInfo {
         eEnd = new Date();
         eDescription = "";
         eOrgName = "";
-        eOrgDesc = "";
         eAvailable = 0;
         ePrice = 0;
         eReserved = 0;
@@ -46,7 +44,6 @@ public class EventInfo {
             String eEnd,
             String eDescription,
             String eOrgName,
-            String eOrgDesc,
             float ePrice,
             int eAvailable,
             int eReserved)
@@ -57,7 +54,6 @@ public class EventInfo {
         //this.eEnd = eEnd;
         this.eDescription = eDescription;
         this.eOrgName = eOrgName;
-        this.eOrgDesc = eOrgDesc;
         this.ePrice = ePrice;
         this.eAvailable = eAvailable;
         this.eReserved = eReserved;
@@ -112,10 +108,6 @@ public class EventInfo {
         this.eOrgName = eOrgName;
     }
 
-    public void seteOrgDesc(String eOrgDesc) {
-        this.eOrgDesc = eOrgDesc;
-    }
-
     public void seteAvailable(int eAvailable) {
         this.eAvailable = eAvailable;
     }
@@ -154,10 +146,6 @@ public class EventInfo {
 
     public String geteOrgName() {
         return eOrgName;
-    }
-
-    public String geteOrgDesc() {
-        return eOrgDesc;
     }
 
     public float getePrice() {

@@ -36,8 +36,8 @@ public class EventInfoTest {
     {
         int ret = 0;
         ret = eventInfo.SetEventInfos("event1","UH","01/02/17 - 10:00",
-                "01/03/17 - 10:00","this is event1","org1","org1 desc",
-                20,0,0);
+                "01/03/17 - 10:00","this is event1","org1",7,
+                20,0);
         assertEquals(1, ret);
     }
 
@@ -87,14 +87,6 @@ public class EventInfoTest {
         String sref = "org2";
         eventInfo.seteOrgName(sref);
         String stest = eventInfo.geteOrgName();
-        assertEquals(sref, stest);
-    }
-
-    @Test
-    public void TestSeteOrgDesc() {
-        String sref = "org2 desc";
-        eventInfo.seteOrgDesc(sref);
-        String stest = eventInfo.geteOrgDesc();
         assertEquals(sref, stest);
     }
 
@@ -167,11 +159,6 @@ public class EventInfoTest {
         assertNotNull(etest);
     }
 
-    @Test
-    public void TestGeteOrgDesc() {
-        String etest = eventInfo.geteOrgDesc();
-        assertNotNull(etest);
-    }
 
     @Test
     public void TestGetePrice() {

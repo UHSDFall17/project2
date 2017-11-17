@@ -2,6 +2,7 @@ package eventBrite.UH.EventCreate;
 
 import eventBrite.UH.EventTools.EventTypes;
 
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
@@ -19,10 +20,10 @@ public class EventCreate {
         return ec;
     }
 
-    public EventTypes.Return createEvent()
+    public EventTypes.Return createEvent(InputStream in)
     {
         EventInfo eInfo = new EventInfo();
-        Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(in);
 
         String strIn;
         Date dateIn;

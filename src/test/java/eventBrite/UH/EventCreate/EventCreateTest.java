@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
@@ -13,10 +14,10 @@ import static org.junit.Assert.assertEquals;
 
 public class EventCreateTest {
 
-    private EventCreate eventCreate;
+    private static EventCreate eventCreate = EventCreate.getInstance();
     @Before
     public void setUp() throws FileNotFoundException {
-        eventCreate = new EventCreate(new Scanner(new File("./testEventCreate")));
+        eventCreate = EventCreate.getInstance();
     }
 
     @After
@@ -27,21 +28,25 @@ public class EventCreateTest {
     @Test
     public void TestcreateEvent()
     {
-        EventTypes.Return ret = eventCreate.createEvent();
+        EventTypes.Return ret = null;
+        try {
+            ret = eventCreate.createEvent(new FileInputStream("./src/test/testInputs/testEventCreate"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         assertEquals(EventTypes.Return.SUCCESS,ret);
 
     }
+
     @Test(expected = java.lang.AssertionError.class)
     public void TestcreateEventAssertException() throws FileNotFoundException {
-        eventCreate = new EventCreate(new Scanner(new File("./testEventCreate2")));
-        EventTypes.Return ret = eventCreate.createEvent();
+        EventTypes.Return ret = eventCreate.createEvent(new FileInputStream("./src/test/testInputs/testEventCreate2"));
         assertEquals(EventTypes.Return.SUCCESS,ret);
     }
 
     @Test
     public void TestcreateEventEmptyStringException() throws FileNotFoundException {
-        eventCreate = new EventCreate(new Scanner(new File("./testEventCreate3")));
-        EventTypes.Return ret = eventCreate.createEvent();
+        EventTypes.Return ret = eventCreate.createEvent(new FileInputStream("./src/test/testInputs/testEventCreate3"));
         assertEquals(EventTypes.Return.GENERALERROR,ret);
     }
 
