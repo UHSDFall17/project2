@@ -1,15 +1,5 @@
 #!/bin/bash
 
-sudo cp -rf ../database/project2 /var/lib/mysql/
-sudo cp ../database/ib_buffer_pool /var/lib/mysql/
-sudo cp ../database/ibdata1 /var/lib/mysql/
-sudo cp ../database/ib_logfile0 /var/lib/mysql/
-sudo cp ../database/ib_logfile1 /var/lib/mysql/
-sudo cp ../database/ibtmp1  /var/lib/mysql/
-
-sudo chown -R mysql:mysql /var/lib/mysql/project2
-sudo chown -R mysql:mysql /var/lib/mysql/ib_buffer_pool
-sudo chown -R mysql:mysql /var/lib/mysql/ibdata1
-sudo chown -R mysql:mysql /var/lib/mysql/ib_logfile0
-sudo chown -R mysql:mysql /var/lib/mysql/ib_logfile1
-sudo chown -R mysql:mysql /var/lib/mysql/ibtmp1
+mysql -u root -p -e "DROP DATABASE IF EXISTS project2"
+mysql -u root -p  -e "CREATE DATABASE project2"
+mysql -u root -p project2 < ../database/project2.sql
