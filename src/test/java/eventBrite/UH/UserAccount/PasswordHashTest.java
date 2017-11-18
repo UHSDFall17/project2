@@ -1,4 +1,4 @@
-package eventBrite.UH.UserAccount;
+package eventBrite.UH.AccountManager;
 
 import org.junit.After;
 import org.junit.Before;

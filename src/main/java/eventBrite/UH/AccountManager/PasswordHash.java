@@ -1,4 +1,4 @@
-package eventBrite.UH.UserAccount;
+package eventBrite.UH.AccountManager;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;

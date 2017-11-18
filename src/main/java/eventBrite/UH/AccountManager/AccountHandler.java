@@ -1,13 +1,17 @@
-package eventBrite.UH.UserAccount;
+package eventBrite.UH.AccountManager;
 
 import eventBrite.UH.EventTools.MailNotifier;
 import eventBrite.UH.EventTools.EventTypes;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
-class AccountHandler
+public class AccountHandler
 {
+	private static AccountHandler accountHandler = new AccountHandler();
 	private PasswordHash passwdHash;
+
+	public static AccountHandler getInstance() {return accountHandler;}
+
 
 	public AccountHandler() 
 	{

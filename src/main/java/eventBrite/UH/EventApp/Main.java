@@ -3,7 +3,7 @@ package eventBrite.UH.EventApp;
 import eventBrite.UH.DatabaseManager.DBEventInfo;
 import eventBrite.UH.EventManager.EventHandler;
 import eventBrite.UH.EventTools.EventTypes;
-import eventBrite.UH.UserLogin.UserLogin;
+import eventBrite.UH.AccountManager.UserLogin;
 
 import java.util.ArrayList;
 import java.util.Arrays;

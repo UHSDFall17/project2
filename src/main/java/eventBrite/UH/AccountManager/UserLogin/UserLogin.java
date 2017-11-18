@@ -1,4 +1,4 @@
-package eventBrite.UH.UserLogin;
+package eventBrite.UH.AccountManager;
 
 import java.nio.charset.Charset;
 import java.nio.file.Path;

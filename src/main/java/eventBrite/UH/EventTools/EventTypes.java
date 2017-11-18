@@ -37,8 +37,8 @@ public class EventTypes
 		EVENTNOTFOUND		(21, "event not found"),
 		// return codes for general usage 100:
 		EXCEPTIONRAISED 	(7, "Exception Raised"),
-		EPHONEFORMAT 		(5, "Wrong Phone Format");
-
+		EPHONEFORMAT 		(5, "Wrong Phone Format"),
+		EINSUFFPRIV			(103, "Insufficient Privileges error");
 		private int 	code;
 		private String 	description;
 

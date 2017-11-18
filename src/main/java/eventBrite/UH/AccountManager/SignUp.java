@@ -1,6 +1,5 @@
-package eventBrite.UH.UserAccount;
+package eventBrite.UH.AccountManager;
 
-import eventBrite.UH.UserAccount.UserInfo;
 import java.util.Scanner;
 import java.util.ArrayList;
 
