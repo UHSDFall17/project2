@@ -13,7 +13,7 @@ public class AccountHandler
 	public static AccountHandler getInstance() {return accountHandler;}
 
 
-	public AccountHandler() 
+	private AccountHandler() 
 	{
 		passwdHash = new PasswordHash();
 	}
