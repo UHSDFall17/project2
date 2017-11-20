@@ -4,9 +4,11 @@ import eventBrite.UH.EventTools.EventTypes;
 
 class GuestAccount extends UserAccount
 {
-	public GuestAccount() {initialize();}
+	public GuestAccount(UserInfo userInfo) 
+	{
+		this.userInfo = userInfo;
+	}
 	
-
 	private static String guestWarning = ": This functionality is available only for Members";
 	public void createEvent() {System.out.println(EventTypes.Return.EINSUFFPRIV + guestWarning);}
 	public void updateEvent() {System.out.println(EventTypes.Return.EINSUFFPRIV + guestWarning);}

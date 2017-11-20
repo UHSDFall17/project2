@@ -2,12 +2,9 @@ package eventBrite.UH.AccountManager;
 
 class MemberAccount extends UserAccount
 {
-	private int memberId;
-
-	public MemberAccount(int id)
+	public MemberAccount(UserInfo userInfo)
 	{
-		initialize();
-		memberId = id;
+		this.userInfo = userInfo;
 	}
 
 	public void createEvent() {eventHandler.create();}

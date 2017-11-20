@@ -1,46 +1,45 @@
 package eventBrite.UH.AccountManager;
 
-import eventBrite.UH.EventTools.MailNotifier;
-import eventBrite.UH.EventTools.EventTypes;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
+import eventBrite.UH.EventTools.EventTypes.Return;
+import eventBrite.UH.EventTools.EventTypes.AccountType;
 
 public class AccountHandler
 {
 	private static AccountHandler accountHandler = new AccountHandler();
 	private PasswordHash passwdHash;
 
-	public static AccountHandler getInstance() {return accountHandler;}
-
-
 	private AccountHandler() 
 	{
 		passwdHash = new PasswordHash();
 	}
-
+	
+	public static AccountHandler getInstance() {return accountHandler;}
 	public PasswordHash getPasswdHash() {return passwdHash;}
-
-	public EventTypes.Return createUserAccount(
-		String firstName, 
-		String lastName, 
-		String email, 
-		String password,
-		String passwordConfirm)
+	public UserAccount create() 
 	{
-		if(!MailNotifier.checkEmailAddressFormat(email))
-			return EventTypes.Return.EEMAILFORMAT;
-		if(!password.equals(passwordConfirm))
-			return EventTypes.Return.EPASSWDMATCH;
-		try
+		Return ret;
+		SignUp userSignUp = new SignUp(passwdHash);
+
+		while(true)
 		{
-			passwdHash.generatePasswordHash(password);
-		}	
-		catch (NoSuchAlgorithmException | InvalidKeySpecException e)
-		{	
-			System.out.println(e);
-			return EventTypes.Return.EXCEPTIONRAISED;
+			ret = userSignUp.signUpPage();
+			if(ret == Return.SUCCESS)
+				break;
+			else
+			{
+				if(userSignUp.signUpError(ret) == Return.RESET)
+				{
+					// Repload Main Page after cleaning everything
+					break;
+				}	
+			}
 		}
-		// Create User Account and put it in the dataBase
-		return EventTypes.Return.SUCCESS;
+
+		// userInfo is not created in userSignUP if ret is not Return.SUCCESS
+		if(ret != Return.SUCCESS)
+			return null;
+		
+		//Create Account In data Base  userSignUp.getUserINfo();
+		return AccountFactory.getInstance().create(AccountType.MEMBER, userSignUp.getUserInfo());
 	}	
 }

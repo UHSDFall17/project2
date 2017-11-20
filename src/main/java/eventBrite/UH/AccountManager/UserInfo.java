@@ -1,48 +1,35 @@
 package eventBrite.UH.AccountManager;
 
-public class UserInfo{
+public class UserInfo
+{
+	private int 	id;
+	private String 	userName;
+	private String 	firstName;
+	private String 	lastName;
+	private String 	email;
+	private String 	password;
 
-	private String uName; 
-	private String fName;
-	private String lName;
-	private char pWord;
-
-public UserInfo(String username, String firstname, String lastname, char password) { //constructor
-
-		uName = username;
-		pWord = password;
-		fName = firstname;
-		lName = lastname;
+	public UserInfo(String firstName, String lastName, String email, String hashedPassword) 
+	{
+		this.id = -1;
+		this.userName 	= firstName + '.' + lastName;
+		this.firstName 	= firstName;
+		this.lastName 	= lastName;
+		this.email 		= email;
+		this.password 	= hashedPassword;
 	}
-    public String getUsername (){
-	return fName;
-}
 
-    public char getPassword(){
-	return pWord;
-}
-	
-    public String getFirstname(){
-	return fName;
-}
-	
-    public String getLastname(){
-	return lName;
-}
-	
-public void setUsername(String fName){
-	this.fName = fName;
-}
-	
-public void setPassword(char  pWord){
-	this.pWord = pWord;
-}
+	public int 	  getId()			{return id;}
+	public String getUsername() 	{return userName;}
+	public String getFirstname()	{return firstName;}
+	public String getLastname()		{return lastName;}
+	public String getEmail()		{return email;}	
+	public String getPassword() 	{return password;}
 
-public void setFirstname(String fName){
-	this.fName = fName;
-}
-	
-public void setLastname(String lName){
-	this.lName = lName;
-}
+	public void setId(int id)				{this.id = id;}
+	public void setFirstname(String fName)	{this.firstName = fName;}
+	public void setLastname(String lName) 	{this.lastName = lName;}
+	public void setEmail(String email)		{this.email = email;}	
+	public void setPassword(String  pWord) 	{this.password = pWord;}
+
 }

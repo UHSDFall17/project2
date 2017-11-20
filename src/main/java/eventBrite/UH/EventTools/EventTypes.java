@@ -20,6 +20,20 @@ public class EventTypes
 		}
 	}
 
+	public enum AccountType 
+	{
+		GUEST(0),
+		MEMBER(1),
+		ADMIN(2);
+		
+		private int code;
+
+		AccountType(int code)
+		{
+			this.code = code;
+		}
+	}
+
 	public enum Return
 	{
 		GENERALERROR		(0, "General Error"),
@@ -31,14 +45,18 @@ public class EventTypes
 		EEMAILMATCH 		(4, "Mails don't match"),
 		// return codes for user account 11-20
 		EPASSWDMATCH 		(11, "Passwords don't match"),
-		//return codes for database handler 21-30
+		// return codes for database handler 21-30
 		CONNECTIONFAILED	(21, "Connection failed"),
 		SELECTFAILED		(22, "Select from table failed"),
 		EVENTNOTFOUND		(21, "event not found"),
+		// return codes for signals 31-50
+		RESET				(31, "Reload Main Page"),
+		CONTINUE			(31, "Reload Main Page"),
 		// return codes for general usage 100:
 		EXCEPTIONRAISED 	(7, "Exception Raised"),
 		EPHONEFORMAT 		(5, "Wrong Phone Format"),
 		EINSUFFPRIV			(103, "Insufficient Privileges error");
+
 		private int 	code;
 		private String 	description;
 
