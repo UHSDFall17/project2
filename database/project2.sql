@@ -19,10 +19,10 @@
 -- Table structure for table `eventinfo`
 --
 
-DROP TABLE IF EXISTS `eventinfo`;
+DROP TABLE IF EXISTS `EventInfo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `eventinfo` (
+CREATE TABLE `EventInfo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `eTitle` text,
   `eLocation` text,
@@ -41,10 +41,10 @@ CREATE TABLE `eventinfo` (
 -- Dumping data for table `eventinfo`
 --
 
-LOCK TABLES `eventinfo` WRITE;
-/*!40000 ALTER TABLE `eventinfo` DISABLE KEYS */;
-INSERT INTO `eventinfo` VALUES (1,'hello event','UH','2017-11-16 10:00:00','2017-11-16 11:00:00','description','orgname',7.4,20,0);
-/*!40000 ALTER TABLE `eventinfo` ENABLE KEYS */;
+LOCK TABLES `EventInfo` WRITE;
+/*!40000 ALTER TABLE `EventInfo` DISABLE KEYS */;
+INSERT INTO `EventInfo` VALUES (1,'hello event','UH','2017-11-16 10:00:00','2017-11-16 11:00:00','description','orgname',7.4,20,0);
+/*!40000 ALTER TABLE `EventInfo` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

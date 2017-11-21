@@ -1,6 +1,7 @@
 package eventBrite.UH.EventManager;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import eventBrite.UH.EventTools.AttributesGetter;
 import eventBrite.UH.EventTools.EventTypes;
 
 import java.io.File;
@@ -11,7 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 
-public class EventInfo {
+public class EventInfo implements AttributesGetter {
 
 
     private String eTitle;
@@ -122,6 +123,55 @@ public class EventInfo {
 
     public void setePrice(float ePrice) {
         this.ePrice = ePrice;
+    }
+
+    public Object getByName(String name)
+    {
+        if(name.equals("eTitle"))
+        {
+            return geteTitle();
+        }
+        else if (name.equals("eLocation"))
+        {
+            return geteLocation();
+
+        }
+        else if (name.equals("eStart"))
+        {
+            return geteStart();
+        }
+        else if (name.equals("eEnd"))
+        {
+            return geteEnd();
+
+        }
+        else if (name.equals("eOrgName"))
+        {
+            return geteOrgName();
+        }
+        else if (name.equals("eDescription"))
+        {
+            return geteDescription();
+
+        }
+        else if (name.equals("ePrice"))
+        {
+            return getePrice();
+        }
+        else if (name.equals("eAvailable"))
+        {
+            return geteAvailable();
+
+        }
+        else if (name.equals("eReserved"))
+        {
+            return geteReserved();
+        }
+        else
+        {
+            System.out.println("attribute not found");
+            return null;
+        }
     }
 
     public String geteTitle() {
