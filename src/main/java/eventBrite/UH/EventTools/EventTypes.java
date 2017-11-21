@@ -45,17 +45,20 @@ public class EventTypes
 		EEMAILMATCH 		(4, "Mails don't match"),
 		// return codes for user account 11-20
 		EPASSWDMATCH 		(11, "Passwords don't match"),
+		EWRONGPASSWD 		(12, "Wrong Password"),
+		EACCOUNTNOTFOUND 	(13, "Account Does NOT exist"),
 		// return codes for database handler 21-30
 		CONNECTIONFAILED	(21, "Connection failed"),
 		SELECTFAILED		(22, "Select from table failed"),
 		EVENTNOTFOUND		(21, "event not found"),
 		// return codes for signals 31-50
 		RESET				(31, "Reload Main Page"),
-		CONTINUE			(31, "Reload Main Page"),
+		CONTINUE			(32, "Continue"),
 		// return codes for general usage 100:
-		EXCEPTIONRAISED 	(7, "Exception Raised"),
-		EPHONEFORMAT 		(5, "Wrong Phone Format"),
-		EINSUFFPRIV			(103, "Insufficient Privileges error");
+		EXCEPTIONRAISED 	(101, "Exception Raised"),
+		EPHONEFORMAT 		(102, "Wrong Phone Format"),
+		EINSUFFPRIV			(103, "Insufficient Privileges error"),
+		EWRONGINPUT			(104, "Wrong Input");
 
 		private int 	code;
 		private String 	description;
@@ -70,6 +73,11 @@ public class EventTypes
 		public String toString()
 		{
 			return description;
+		}
+
+		public static void printError(Return ret) 
+		{
+			System.out.println("An Error has Occured: " + ret);
 		}
 	}
 }

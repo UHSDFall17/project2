@@ -5,8 +5,10 @@ import eventBrite.UH.EventTools.EventTypes.AccountType;
 
 public class AccountHandler
 {
-	private static AccountHandler accountHandler = new AccountHandler();
-	private PasswordHash passwdHash;
+	private static 	AccountHandler 		accountHandler = new AccountHandler();
+	private			AccountFactory		accountFactory = AccountFactory.getInstance();
+
+	private 		PasswordHash 		passwdHash;
 
 	private AccountHandler() 
 	{
@@ -14,9 +16,23 @@ public class AccountHandler
 	}
 	
 	public static AccountHandler getInstance() {return accountHandler;}
-	public PasswordHash getPasswdHash() {return passwdHash;}
-	public UserAccount create() 
+
+	public UserAccount login()
 	{
+		UserLogin 	userLogin 	= new UserLogin(passwdHash);
+		Return 		ret 	  	= userLogin.login();
+
+		if(ret == Return.SUCCESS)
+			return accountFactory.create(AccountType.MEMBER, userLogin.getUserInfo());
+
+		return null;
+	}
+
+	public UserAccount create(AccountType accountType)
+	{
+		if(accountType == AccountType.GUEST)
+			return accountFactory.create(accountType, null);
+
 		Return ret;
 		SignUp userSignUp = new SignUp(passwdHash);
 
@@ -40,6 +56,6 @@ public class AccountHandler
 			return null;
 		
 		//Create Account In data Base  userSignUp.getUserINfo();
-		return AccountFactory.getInstance().create(AccountType.MEMBER, userSignUp.getUserInfo());
+		return accountFactory.create(AccountType.MEMBER, userSignUp.getUserInfo());
 	}	
 }

@@ -2,8 +2,8 @@ package eventBrite.UH.EventApp;
 
 import eventBrite.UH.DatabaseManager.DBEventInfo;
 import eventBrite.UH.EventManager.EventHandler;
+import eventBrite.UH.AccountManager.AccountHandler;
 import eventBrite.UH.EventTools.EventTypes;
-import eventBrite.UH.AccountManager.UserLogin;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,8 +36,7 @@ public class Main {
                 break;
             case "login":
                 System.out.println("you started "+featureList.get(select));
-                UserLogin uLogin = new UserLogin(selectFeature);
-                uLogin.Login();
+                AccountHandler.getInstance().login();
                 break;
             case "create event":
                 System.out.println("you started "+featureList.get(select));
