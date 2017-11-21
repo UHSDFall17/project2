@@ -2,7 +2,7 @@ package eventBrite.UH.AccountManager;
 
 import eventBrite.UH.EventManager.EventHandler;
 
-abstract class UserAccount
+public abstract class UserAccount
 {
 	protected UserInfo 		userInfo;
 	protected EventHandler 	eventHandler;

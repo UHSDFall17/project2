@@ -1,122 +1,93 @@
 package eventBrite.UH.AccountManager;
 
-import java.nio.charset.Charset;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Scanner;
-import java.util.List;
 
-import java.io.IOException;
-import java.nio.file.Files;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 
-public class UserLogin {
+import eventBrite.UH.EventTools.EventTypes.Return;
+import eventBrite.UH.EventTools.MailNotifier;
 
-    private Scanner sc;
+class UserLogin
+{
+	private Scanner 		sc;
+	private PasswordHash 	passwdHash;
+	private	String 			email;
+	private	String 			password;
+	private UserInfo 		userInfo;
 
-    public UserLogin(Scanner sc)
-    {
-        this.sc=sc;
-    }
-    public int Login()
-    {
-        String userName;
-        String passwordInput;
-        String password;
-        int userFound = 0;
-        int passFound = 0;
-        int lineCount = 0;
-        int liner = 0;
-        int startIndex;
-        int endIndex;
-        try {
-            System.out.println("Input your User Name"); //USER
-            userName=sc.nextLine();
+	public UserLogin(PasswordHash passwdHash)
+	{
+		sc 		 		= new Scanner(System.in);
+		this.passwdHash = passwdHash;
+		reset();
+	}
 
-            /*CHECK IF USER EXISTS*/
-            Path userBase = Paths.get("User_db.json");
-            Charset charset = Charset.forName("ISO-8859-1");
-            try {
-                List<String> lines = Files.readAllLines(userBase, charset);
-                for (String line : lines) {
-                    //System.out.println(line);
-                    line = line.replace("{\"uName\":\"","");
-                    endIndex = line.indexOf("\"");
-                    line = line.substring(0,endIndex);
-                    if (userName.equals(line)){
-                        //System.out.println("Correct User: " + userName);
-                        userFound = 1;
-                        liner = lineCount;
-                    }
-                    /*else{
-                        System.out.println("Incorrect User: "+ line);
-                        System.exit(1);
-                    }*/
-                    lineCount += 1;
-                }
-                if (userFound == 0)
-                {
-                    System.out.println("User Not Found: "+ userName);
-                    System.exit(1);
-                }
-            }catch (IOException e) {
-                System.out.println(e);
-            }
+	public UserInfo getUserInfo() {return userInfo;}
+	public Return login()
+	{
+		Return ret = loadLoginPage();
 
-            /*When the string in front of "uName": == userName make the password = corresponding "pWord":*/
+		if((ret != Return.SUCCESS) && (ret != Return.RESET))
+		{
+			Return.printError(ret);
+			return login();
+		}
 
-            lineCount = 0;
-            System.out.println("Input your Password"); //PASSWORD
-            passwordInput=sc.nextLine();
+		if(ret == Return.RESET)
+			reset();
 
+		return ret;
+	}
 
-            try {
-                List<String> lines = Files.readAllLines(userBase, charset);
-                for (String line : lines) {
-                    //System.out.println(line);
-                    startIndex = line.indexOf("pWord\":\"")+8;
-                    //System.out.println("line == " + line + "\nstartIndex == " + startIndex);
-                    endIndex = line.indexOf("\"}");
-                    line = line.substring(startIndex,endIndex);
-                    if (passwordInput.equals(line) && lineCount == liner){
-                        System.out.println("Login Successful");
-                        passFound = 1;
-                    }
-                    else{
-                        //System.out.println("Expected Pass: "+ line);
-                        //System.exit(1);
-                    }
-                    lineCount += 1;
-                }
-                if (passFound == 0)
-                {
-                    System.out.println("Password does not match: "+ passwordInput);
-                    System.exit(1);
-                }
-            }catch (IOException e) {
-                System.out.println(e);
-            }
+	private Return loadLoginPage()
+	{
+		System.out.println("Login to your Account: [Continue/cancel]\n");
+		String resp = sc.nextLine();
 
-            /*CHECK IF USER AND PASSWORD MATCH*/
-            /*if (passwordInput.equals(password))
-            {
-                System.out.println("Thanks for Logging in");
-            }
-            else
-            {
-                System.out.println("User and Password do not match!");
-            }*/
+		if(resp.toUpperCase().equals("CANCEL"))
+			return Return.RESET;
 
+		if(!resp.toUpperCase().equals("CONTINUE"))
+		{
+			Return.printError(Return.EWRONGINPUT);
+			return loadLoginPage();
+		}
+		System.out.println("Input your email:");
+		email = sc.nextLine();
+		System.out.println("Input your password:");
+		password = sc.nextLine();
 
+		return verifyLoginInfo();
+	}
 
+	private Return verifyLoginInfo()
+	{
+		if(!MailNotifier.checkEmailAddressFormat(email))
+			return Return.EEMAILFORMAT;
 
-        }catch (Exception e)
-        {
-            System.out.println(e.toString());
-            return 0;
-        }
+		// userInfo = DB.getUserInfoByEmail(email);
 
+		if(userInfo == null)
+			return Return.EACCOUNTNOTFOUND;
 
+		try
+		{
+			if(!passwdHash.validatePassword(password, userInfo.getPassword()))
+				return Return.EWRONGPASSWD;
+		}
+		catch (NoSuchAlgorithmException | InvalidKeySpecException e)
+		{
+			System.out.println(e);
+		}
 
-        return 0;
-    }
+		return Return.SUCCESS;
+	}
+
+	private void reset()
+	{
+		email 	 = null;
+		password = null;
+		userInfo = null;
+	}
 }

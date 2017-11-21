@@ -46,7 +46,7 @@ class SignUp
 
 	public Return signUpError(Return ret)
 	{
-		System.out.println("Error has Occured:\n\t" + ret);
+		Return.printError(ret);
 		System.out.println("Do you want to go back to main page or continue your account creation");
 		System.out.println("Continue?[Y/N]:");
 		String resp = in.next();
