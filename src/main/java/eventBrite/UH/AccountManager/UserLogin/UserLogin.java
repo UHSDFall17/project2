@@ -7,6 +7,7 @@ import java.security.spec.InvalidKeySpecException;
 
 import eventBrite.UH.EventTools.EventTypes.Return;
 import eventBrite.UH.EventTools.MailNotifier;
+import eventBrite.UH.EventTools.EventInputScanner;
 
 class UserLogin
 {
@@ -42,17 +43,9 @@ class UserLogin
 
 	private Return loadLoginPage()
 	{
-		System.out.println("Login to your Account: [Continue/cancel]\n");
-		String resp = sc.nextLine();
-
-		if(resp.toUpperCase().equals("CANCEL"))
+		if(EventInputScanner.continueOrReset("Login to your Account") == Return.RESET)
 			return Return.RESET;
 
-		if(!resp.toUpperCase().equals("CONTINUE"))
-		{
-			Return.printError(Return.EWRONGINPUT);
-			return loadLoginPage();
-		}
 		System.out.println("Input your email:");
 		email = sc.nextLine();
 		System.out.println("Input your password:");

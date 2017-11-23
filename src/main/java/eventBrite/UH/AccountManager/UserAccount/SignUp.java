@@ -6,6 +6,7 @@ import eventBrite.UH.EventTools.MailNotifier;
 import eventBrite.UH.EventTools.EventTypes.Return;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import eventBrite.UH.EventTools.EventInputScanner;
 
 class SignUp 
 {
@@ -38,20 +39,11 @@ class SignUp
 	}
 
 	private void reset() {userInfo = null;}
-	
+
 	private Return loadSignUpPage()
 	{
-		System.out.println("Create a new account: [Continue/cancel]");
-		String resp = sc.next();
-
-		if(resp.toUpperCase().equals("CANCEL"))
+		if(EventInputScanner.continueOrReset("Create a new account") == Return.RESET)
 			return Return.RESET;
-
-		if(!resp.toUpperCase().equals("CONTINUE"))
-		{
-			Return.printError(Return.EWRONGINPUT);
-			return loadSignUpPage();
-		}
 
 		System.out.println("++++++++++++++++++++");
 		System.out.println("       SIGNUP       ");
