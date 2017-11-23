@@ -31,31 +31,14 @@ public class AccountHandler
 	public UserAccount create(AccountType accountType)
 	{
 		if(accountType == AccountType.GUEST)
-			return accountFactory.create(accountType, null);
+			return accountFactory.create(AccountType.GUEST, null);
 
-		Return ret;
-		SignUp userSignUp = new SignUp(passwdHash);
+		SignUp userSignUp 	= new SignUp(passwdHash);
+		Return ret 			= userSignUp.signUp();
 
-		while(true)
-		{
-			ret = userSignUp.signUpPage();
-			if(ret == Return.SUCCESS)
-				break;
-			else
-			{
-				if(userSignUp.signUpError(ret) == Return.RESET)
-				{
-					// Repload Main Page after cleaning everything
-					break;
-				}	
-			}
-		}
-
-		// userInfo is not created in userSignUP if ret is not Return.SUCCESS
-		if(ret != Return.SUCCESS)
-			return null;
+		if(ret == Return.SUCCESS)
+			return accountFactory.create(AccountType.MEMBER, userSignUp.getUserInfo());;
 		
-		//Create Account In data Base  userSignUp.getUserINfo();
-		return accountFactory.create(AccountType.MEMBER, userSignUp.getUserInfo());
+		return null;
 	}	
 }

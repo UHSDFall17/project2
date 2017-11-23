@@ -4,7 +4,7 @@ import eventBrite.UH.DatabaseManager.DBEventInfo;
 import eventBrite.UH.EventManager.EventHandler;
 import eventBrite.UH.AccountManager.AccountHandler;
 import eventBrite.UH.EventTools.EventTypes;
-
+import eventBrite.UH.EventTools.EventTypes.AccountType;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -40,6 +40,7 @@ public class Main {
                 break;
             case "create event":
                 System.out.println("you started "+featureList.get(select));
+                AccountHandler.getInstance().create(AccountType.MEMBER);
                 // instantiate and call feature class here
                 //EventCreate eCreate = new EventCreate(selectFeature);
                 //eCreate.createEvent();

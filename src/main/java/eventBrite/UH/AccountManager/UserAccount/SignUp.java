@@ -9,50 +9,67 @@ import java.security.spec.InvalidKeySpecException;
 
 class SignUp 
 {
-	private UserInfo 		userInfo;
+	private Scanner 		sc;
 	private PasswordHash 	passwdHash;
-	private Scanner 		in;
+	private UserInfo 		userInfo;
 
 	public UserInfo getUserInfo() {return userInfo;}
 
 	public SignUp(PasswordHash passwdHash) 
 	{
 		userInfo = null;
-		in = new Scanner(System.in);
+		sc = new Scanner(System.in);
 		this.passwdHash = passwdHash;
 	}
 	
-	public Return signUpPage()
+	public Return signUp()
 	{
+		Return ret = loadSignUpPage();
+		if((ret != Return.SUCCESS) && (ret != Return.RESET))
+		{
+			Return.printError(ret);
+			return signUp();
+		}
+
+		if(ret == Return.RESET)
+			reset();
+
+		return ret;
+	}
+
+	private void reset() {userInfo = null;}
+	
+	private Return loadSignUpPage()
+	{
+		System.out.println("Create a new account: [Continue/cancel]");
+		String resp = sc.next();
+
+		if(resp.toUpperCase().equals("CANCEL"))
+			return Return.RESET;
+
+		if(!resp.toUpperCase().equals("CONTINUE"))
+		{
+			Return.printError(Return.EWRONGINPUT);
+			return loadSignUpPage();
+		}
 
 		System.out.println("++++++++++++++++++++");
 		System.out.println("       SIGNUP       ");
 		System.out.println("++++++++++++++++++++");
 		System.out.print("Enter Your FirstName: ");
-		String firstName = in.next();
+		String firstName = sc.next();
 		System.out.print("Enter Your LastName: ");
-		String lastName = in.next();
+		String lastName = sc.next();
 		System.out.print("Enter Your Email: ");
-		String email = in.next();
+		String email = sc.next();
 		System.out.print("Enter Your Password: ");
-		String password = in.next();
+		String password = sc.next();
 		System.out.print("Confirm Your Password: ");
-		String passwordConfirm = in.next();     
+		String passwordConfirm = sc.next();     
 		System.out.println("NOTE*** Make sure to not share your password with anyone! ");
 		System.out.println("++++++++++++++++++++");
 
 		return createUserInfo(firstName, lastName, email, password, passwordConfirm);
-	}
-
-	public Return signUpError(Return ret)
-	{
-		Return.printError(ret);
-		System.out.println("Do you want to go back to main page or continue your account creation");
-		System.out.println("Continue?[Y/N]:");
-		String resp = in.next();
-		if("N" == resp.toUpperCase() || "NO" == resp.toUpperCase())
-			return Return.RESET;
-		return Return.CONTINUE;
 	}
 
 	private Return createUserInfo(
