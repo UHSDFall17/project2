@@ -10,7 +10,8 @@ import eventBrite.UH.EventTools.EventInputScanner;
 
 class SignUp 
 {
-	private Scanner 		sc;
+	private static Scanner 		sc = EventInputScanner.getScanner();
+
 	private PasswordHash 	passwdHash;
 	private UserInfo 		userInfo;
 
@@ -19,7 +20,6 @@ class SignUp
 	public SignUp(PasswordHash passwdHash) 
 	{
 		userInfo = null;
-		sc = new Scanner(System.in);
 		this.passwdHash = passwdHash;
 	}
 	
@@ -49,15 +49,15 @@ class SignUp
 		System.out.println("       SIGNUP       ");
 		System.out.println("++++++++++++++++++++");
 		System.out.print("Enter Your FirstName: ");
-		String firstName = sc.next();
+		String firstName = sc.nextLine();
 		System.out.print("Enter Your LastName: ");
-		String lastName = sc.next();
+		String lastName = sc.nextLine();
 		System.out.print("Enter Your Email: ");
-		String email = sc.next();
+		String email = sc.nextLine();
 		System.out.print("Enter Your Password: ");
-		String password = sc.next();
+		String password = sc.nextLine();
 		System.out.print("Confirm Your Password: ");
-		String passwordConfirm = sc.next();     
+		String passwordConfirm = sc.nextLine();     
 		System.out.println("NOTE*** Make sure to not share your password with anyone! ");
 		System.out.println("++++++++++++++++++++");
 

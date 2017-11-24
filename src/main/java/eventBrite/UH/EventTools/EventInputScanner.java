@@ -7,10 +7,11 @@ public class EventInputScanner
 {
 	private static Scanner sc = new Scanner(System.in);;
 
+	public static Scanner getScanner() {return sc;}
 	public static Return continueOrReset(String featureName)
 	{
 		System.out.println(featureName + ": [Continue/cancel]");
-		String resp = sc.next();
+		String resp = sc.nextLine();
 
 		if(resp.toUpperCase().equals("CANCEL"))
 			return Return.RESET;

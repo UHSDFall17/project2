@@ -11,7 +11,8 @@ import eventBrite.UH.EventTools.EventInputScanner;
 
 class UserLogin
 {
-	private Scanner 		sc;
+	private static Scanner 		sc = EventInputScanner.getScanner();
+
 	private PasswordHash 	passwdHash;
 	private	String 			email;
 	private	String 			password;
@@ -19,7 +20,6 @@ class UserLogin
 
 	public UserLogin(PasswordHash passwdHash)
 	{
-		sc 		 		= new Scanner(System.in);
 		this.passwdHash = passwdHash;
 		reset();
 	}

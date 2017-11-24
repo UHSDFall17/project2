@@ -6,6 +6,7 @@ import eventBrite.UH.AccountManager.AccountHandler;
 import eventBrite.UH.EventTools.EventTypes.Return;
 import eventBrite.UH.EventTools.EventTypes.AccountType;
 import eventBrite.UH.AccountManager.UserAccount;
+import eventBrite.UH.EventTools.EventInputScanner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,7 +17,7 @@ public class Main {
     private static       UserAccount         userAccount    = null;
     private static final AccountHandler      accountHandler = AccountHandler.getInstance();
     private static final EventHandler        eventHandler   = EventHandler.getInstance();
-    private static final Scanner             sc             = new Scanner(System.in);
+    private static final Scanner             sc             = EventInputScanner.getScanner();
     private static final ArrayList<String>   featureList    = new ArrayList<String>(Arrays.asList(
             "Login/Create Account", "create event", "Exit"));
 
