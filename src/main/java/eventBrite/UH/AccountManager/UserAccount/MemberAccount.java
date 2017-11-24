@@ -5,6 +5,8 @@ class MemberAccount extends UserAccount
 	public MemberAccount(UserInfo userInfo)
 	{
 		this.userInfo = userInfo;
+		if(!isMember)
+			isMember = true;
 	}
 
 	public void createEvent() {eventHandler.create();}

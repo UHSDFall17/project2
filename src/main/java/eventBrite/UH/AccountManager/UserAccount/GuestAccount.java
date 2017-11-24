@@ -7,6 +7,8 @@ class GuestAccount extends UserAccount
 	public GuestAccount(UserInfo userInfo) 
 	{
 		this.userInfo = userInfo;
+		if(isMember)
+			isMember = false;
 	}
 	
 	private static String guestWarning = ": This functionality is available only for Members";

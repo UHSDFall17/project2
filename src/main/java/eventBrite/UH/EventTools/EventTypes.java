@@ -54,6 +54,7 @@ public class EventTypes
 		// return codes for signals 31-50
 		RESET				(31, "Reload Main Page"),
 		CONTINUE			(32, "Continue"),
+		EXIT 				(32, "Exit Application"),
 		// return codes for general usage 100:
 		EXCEPTIONRAISED 	(101, "Exception Raised"),
 		EPHONEFORMAT 		(102, "Wrong Phone Format"),

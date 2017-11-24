@@ -6,14 +6,20 @@ public abstract class UserAccount
 {
 	protected UserInfo 		userInfo;
 	protected EventHandler 	eventHandler;
+	protected boolean 		isMember;
 
-	protected UserAccount() {initialize();}
+	protected UserAccount()
+	{
+		isMember 	 = false;
+		eventHandler = EventHandler.getInstance();
+	}
 
-	protected void initialize() 	{eventHandler = EventHandler.getInstance();}
-	protected void joinEvent()		{eventHandler.join();}
-	protected void searchEvent()	{eventHandler.search();}
+	public void 	joinEvent()		{eventHandler.join();}
+	public void 	searchEvent()	{eventHandler.search();}
+	public boolean 	isMember() 		{return isMember;}
+	public UserInfo getUserInfo() 	{return userInfo;}
 
-	abstract void createEvent();
-	abstract void updateEvent();	
-	abstract void deleteEvent();
+	public abstract void createEvent();
+	public abstract void updateEvent();	
+	public abstract void deleteEvent();
 }
