@@ -50,7 +50,9 @@ public class EventTypes
 		// return codes for database handler 21-30
 		CONNECTIONFAILED	(21, "Connection failed"),
 		SELECTFAILED		(22, "Select from table failed"),
-		EVENTNOTFOUND		(21, "event not found"),
+		EVENTNOTFOUND		(23, "event not found"),
+		INSERTFAILED		(24, "insert into table failed"),
+		CLOSEFAILED			(25, "closing db failed"),
 		// return codes for signals 31-50
 		RESET				(31, "Reload Main Page"),
 		CONTINUE			(32, "Continue"),

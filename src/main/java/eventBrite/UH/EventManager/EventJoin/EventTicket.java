@@ -11,7 +11,7 @@ class EventTicket
 		String 		clientFullName, 
 		TicketType 	ticketType, 
 		int 		quantity, 
-		float 		newCover)
+		double 		newCover)
 	{
 		ticketInfo = new TicketInfo(clientFullName, ticketType);
 		ticketInfo.setTicketCover(newCover);
@@ -23,7 +23,7 @@ class EventTicket
 	public boolean 		isApproved() 		{return !ticketInfo.isPendingTicket;}
 
 	public int 			getTicketQuantity() {return ticketQuantity;}
-	public float 		getTicketCover() 	{return ticketInfo.ticketCover;}
+	public double 		getTicketCover() 	{return ticketInfo.ticketCover;}
 	public String		getClientFullName()	{return ticketInfo.clientFullName;}
 	public TicketType	getTicketType()		{return ticketInfo.ticketType;}
 
@@ -32,7 +32,7 @@ class EventTicket
 		private String 		clientFullName;
 		private TicketType 	ticketType;
 		private	boolean 	isPendingTicket;
-		private float		ticketCover;
+		private double		ticketCover;
 
 		public TicketInfo(String clientFullName, TicketType ticketType)
 		{
@@ -42,7 +42,7 @@ class EventTicket
 			ticketCover 				= -1;
 		}
 
-		private int setTicketCover(float newCover)
+		private int setTicketCover(double newCover)
 		{
 			ticketCover = (newCover > 0) ? newCover : 0;
 			return 0;

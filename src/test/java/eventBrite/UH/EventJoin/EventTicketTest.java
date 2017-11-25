@@ -62,8 +62,8 @@ public class EventTicketTest
 	public void testDefaultTicketCover()
 	{
 		ticket = new EventTicket("clientFullName", TicketType.VIP, 4, -24.65f);
-		float actualValue = ticket.getTicketCover();
-		float expectedValue = 0f;
+		double actualValue = ticket.getTicketCover();
+		double expectedValue = 0f;
 		assertEquals(expectedValue, actualValue, 0.1);
 	}
 
@@ -71,8 +71,8 @@ public class EventTicketTest
 	public void testTicketCover()
 	{
 		ticket = new EventTicket("clientFullName", TicketType.VIP, 4, 25.99f);
-		float actualValue = ticket.getTicketCover();
-		float expectedValue = 25.99f;
+		double actualValue = ticket.getTicketCover();
+		double expectedValue = 25.99f;
 		assertEquals(expectedValue, actualValue, 0.1);
 	}
 

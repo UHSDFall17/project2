@@ -32,13 +32,13 @@ public class EventInfoTest {
     }
 
     @Test
-    public void testSaveEvent() throws Exception
+    public void testSetEventInfo() throws Exception
     {
-        int ret = 0;
-        ret = eventInfo.SetEventInfos("event1","UH","01/02/17 - 10:00",
-                "01/03/17 - 10:00","this is event1","org1",7,
+        EventTypes.Return ret;
+        ret = eventInfo.SetEventInfos(1,"event1","UH","01/02/17 - 10:00",
+                "01/03/17 - 10:00","this is event1",1,7,
                 20,0);
-        assertEquals(1, ret);
+        assertEquals(EventTypes.Return.SUCCESS, ret);
     }
 
     @Test
@@ -84,9 +84,9 @@ public class EventInfoTest {
 
     @Test
     public void TestSeteOrgName() {
-        String sref = "org2";
-        eventInfo.seteOrgName(sref);
-        String stest = eventInfo.geteOrgName();
+        int sref = 1;
+        eventInfo.seteOrgId(sref);
+        int stest = eventInfo.geteOrgId();
         assertEquals(sref, stest);
     }
 
@@ -118,7 +118,7 @@ public class EventInfoTest {
     public void TestSetePrice() {
         float sref = 30;
         eventInfo.setePrice(sref);
-        float stest = eventInfo.getePrice();
+        double stest = eventInfo.getePrice();
         assertEquals(sref, stest,0.001);
     }
 
@@ -155,14 +155,14 @@ public class EventInfoTest {
 
     @Test
     public void TestGeteOrgName() {
-        String etest = eventInfo.geteOrgName();
+        int etest = eventInfo.geteOrgId();
         assertNotNull(etest);
     }
 
 
     @Test
     public void TestGetePrice() {
-        float etest = eventInfo.getePrice();
+        double etest = eventInfo.getePrice();
         assertNotNull(etest);
     }
 
@@ -178,10 +178,17 @@ public class EventInfoTest {
         assertNotNull(etest);
     }
 
+
     @Test
-    public void TestSaveEvent() throws Exception {
-        EventTypes.Return ret = eventInfo.saveEvent();
-        assertEquals(EventTypes.Return.SUCCESS,ret);
+    public void testSaveEvent() throws Exception
+    {
+        EventTypes.Return ret = EventTypes.Return.SUCCESS;
+        ret = eventInfo.SetEventInfos(-1,"event1","UH","01/02/17 - 10:00",
+                "01/03/17 - 10:00","this is event1",1,7,
+                20,0);
+        ret = eventInfo.saveEvent();
+
+        assertEquals(EventTypes.Return.SUCCESS, ret);
     }
 
 

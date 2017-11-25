@@ -58,8 +58,8 @@ class EventCreate {
 
             //organizer name
             System.out.println("Input the organizer name");
-            strIn=readLine(sc);
-            eInfo.seteOrgName(strIn);
+            intIn=Integer.parseInt(readLine(sc));
+            eInfo.seteOrgId(intIn);
 
 
             System.out.println("Input the event available spots (-1 means unlimited spots)");

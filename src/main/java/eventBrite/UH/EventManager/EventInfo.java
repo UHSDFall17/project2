@@ -1,6 +1,7 @@
 package eventBrite.UH.EventManager;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import eventBrite.UH.DatabaseManager.DBEventInfo;
 import eventBrite.UH.EventTools.AttributesGetter;
 import eventBrite.UH.EventTools.EventTypes;
 
@@ -14,68 +15,69 @@ import java.util.Date;
 
 public class EventInfo implements AttributesGetter {
 
-
+    private int id;
     private String eTitle;
     private String eLocation;
     private Date eStart;
     private Date eEnd;
     private String eDescription;
-    private String eOrgName;
-    private float ePrice;
+    private int eOrgId;
+    private double ePrice;
     private int eAvailable;
     private int eReserved;
 
     public EventInfo()
     {
+        id = -1;
         eTitle = "";
         eLocation = "";
         eStart = new Date();
         eEnd = new Date();
         eDescription = "";
-        eOrgName = "";
+        eOrgId = -1;
         eAvailable = 0;
         ePrice = 0;
         eReserved = 0;
     }
 
-    public int SetEventInfos(
+    public EventTypes.Return SetEventInfos(
+            int id,
             String eTitle,
             String eLocation,
             String eStart,
             String eEnd,
             String eDescription,
-            String eOrgName,
-            float ePrice,
+            int eOrgId,
+            double ePrice,
             int eAvailable,
             int eReserved)
     {
+        this.id = id;
         this.eTitle = eTitle;
         this.eLocation = eLocation;
-        //this.eStart = eStart;
-        //this.eEnd = eEnd;
+        try {
+            this.eStart = new SimpleDateFormat("MM/dd/yy - HH:mm").parse(eStart);
+            this.eEnd = new SimpleDateFormat("MM/dd/yy - HH:mm").parse(eEnd);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         this.eDescription = eDescription;
-        this.eOrgName = eOrgName;
+        this.eOrgId = eOrgId;
         this.ePrice = ePrice;
         this.eAvailable = eAvailable;
         this.eReserved = eReserved;
 
-        return 1;
+        return EventTypes.Return.SUCCESS;
     }
 
     public EventTypes.Return saveEvent() throws Exception
     {
-        ObjectMapper mapper = new ObjectMapper();
+        EventTypes.Return ret = EventTypes.Return.SUCCESS;
 
-        final String json = mapper.writeValueAsString(this);
+        ret = DBEventInfo.insertEventIntoDB(this);
 
-        //Object to JSON in file
-        //mapper.writeValue(new File("./db.json"),this );
-        Files.write(new File("db.json").toPath(), Arrays.asList(json), StandardOpenOption.APPEND);
-
-        //Object to JSON in String
-        //String jsonInString = mapper.writeValueAsString(obj);
-
-        return EventTypes.Return.SUCCESS;
+        return ret;
     }
 
     public void seteTitle(String eTitle) {
@@ -105,8 +107,8 @@ public class EventInfo implements AttributesGetter {
         this.eDescription = eDescription;
     }
 
-    public void seteOrgName(String eOrgName) {
-        this.eOrgName = eOrgName;
+    public void seteOrgId(int eOrgId) {
+        this.eOrgId = eOrgId;
     }
 
     public void seteAvailable(int eAvailable) {
@@ -127,7 +129,11 @@ public class EventInfo implements AttributesGetter {
 
     public Object getByName(String name)
     {
-        if(name.equals("eTitle"))
+        if(name.equals("id"))
+        {
+            return geteId();
+        }
+        else if(name.equals("eTitle"))
         {
             return geteTitle();
         }
@@ -138,16 +144,16 @@ public class EventInfo implements AttributesGetter {
         }
         else if (name.equals("eStart"))
         {
-            return geteStart();
+            return geteStartForDB();
         }
         else if (name.equals("eEnd"))
         {
-            return geteEnd();
+            return geteEndForDB();
 
         }
-        else if (name.equals("eOrgName"))
+        else if (name.equals("eOrgId"))
         {
-            return geteOrgName();
+            return geteOrgId();
         }
         else if (name.equals("eDescription"))
         {
@@ -174,6 +180,8 @@ public class EventInfo implements AttributesGetter {
         }
     }
 
+    public int geteId() {return id;}
+
     public String geteTitle() {
         return eTitle;
     }
@@ -190,15 +198,23 @@ public class EventInfo implements AttributesGetter {
         return new SimpleDateFormat("MM/dd/yy - HH:mm").format(eEnd);
     }
 
+    public String geteStartForDB() {
+        return new SimpleDateFormat("yyyy-MM-dd - HH:mm:ss").format(eStart);
+    }
+
+    public String geteEndForDB() {
+        return new SimpleDateFormat("yyyy-MM-dd - HH:mm:ss").format(eEnd);
+    }
+
     public String geteDescription() {
         return eDescription;
     }
 
-    public String geteOrgName() {
-        return eOrgName;
+    public int geteOrgId() {
+        return eOrgId;
     }
 
-    public float getePrice() {
+    public double getePrice() {
         return ePrice;
     }
 
