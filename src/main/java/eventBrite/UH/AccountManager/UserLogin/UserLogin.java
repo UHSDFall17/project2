@@ -11,8 +11,6 @@ import eventBrite.UH.EventTools.EventInputScanner;
 
 class UserLogin
 {
-	private static Scanner 		sc = EventInputScanner.getScanner();
-
 	private PasswordHash 	passwdHash;
 	private	String 			email;
 	private	String 			password;
@@ -43,6 +41,7 @@ class UserLogin
 
 	private Return loadLoginPage()
 	{
+		Scanner sc = EventInputScanner.getScanner();
 		if(EventInputScanner.continueOrReset("Login to your Account") == Return.RESET)
 			return Return.RESET;
 

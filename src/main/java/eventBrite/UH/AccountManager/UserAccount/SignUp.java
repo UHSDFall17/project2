@@ -10,8 +10,6 @@ import eventBrite.UH.EventTools.EventInputScanner;
 
 class SignUp 
 {
-	private static Scanner 		sc = EventInputScanner.getScanner();
-
 	private PasswordHash 	passwdHash;
 	private UserInfo 		userInfo;
 
@@ -42,6 +40,7 @@ class SignUp
 
 	private Return loadSignUpPage()
 	{
+		Scanner sc = EventInputScanner.getScanner();
 		if(EventInputScanner.continueOrReset("Create a new account") == Return.RESET)
 			return Return.RESET;
 

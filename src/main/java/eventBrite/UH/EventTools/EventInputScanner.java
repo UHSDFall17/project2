@@ -5,9 +5,11 @@ import eventBrite.UH.EventTools.EventTypes.Return;
 
 public class EventInputScanner  
 {
-	private static Scanner sc = new Scanner(System.in);;
+	private static Scanner sc = new Scanner(System.in);
 
 	public static Scanner getScanner() {return sc;}
+	public static void setScanner(Scanner newSc) {sc =newSc;}
+
 	public static Return continueOrReset(String featureName)
 	{
 		System.out.println(featureName + ": [Continue/cancel]");

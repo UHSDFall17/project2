@@ -17,7 +17,6 @@ public class Main {
     private static       UserAccount         userAccount    = null;
     private static final AccountHandler      accountHandler = AccountHandler.getInstance();
     private static final EventHandler        eventHandler   = EventHandler.getInstance();
-    private static final Scanner             sc             = EventInputScanner.getScanner();
     private static final ArrayList<String>   featureList    = new ArrayList<String>(Arrays.asList(
             "Login/Create Account", "create event", "Exit"));
 
@@ -37,6 +36,7 @@ public class Main {
     private static Return loadWelcomePage()
     {
         int resp;
+        Scanner sc = EventInputScanner.getScanner();
 
         System.out.println("Please select an option [1,2,3]:");
         System.out.println("\t1- Continue as Guest");
@@ -81,6 +81,7 @@ public class Main {
     private static Return loadMainPage()
     {
         int select;
+        Scanner sc = EventInputScanner.getScanner();
 
         for(int ftcpt = 0; ftcpt < featureList.size(); ftcpt ++)
         {
