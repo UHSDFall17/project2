@@ -17,8 +17,7 @@ public class DatabaseHandler {
 
             Class.forName("com.mysql.jdbc.Driver");
 
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/project2","root","Project2!" );
-
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/project2?autoReconnect=true&useSSL=false","root","Project2!" );
         }
         catch (Exception e) {
             return EventTypes.Return.CONNECTIONFAILED;
@@ -28,8 +27,18 @@ public class DatabaseHandler {
 
     }
 
-    public static void closeConnection() throws SQLException {
-        con.close();
+    public static EventTypes.Return closeConnection() {
+
+        EventTypes.Return ret = EventTypes.Return.SUCCESS;
+        try {
+            con.close();
+        }
+        catch (Exception e)
+        {
+            return EventTypes.Return.CLOSEFAILED;
+        }
+
+        return ret;
     }
 
 
@@ -49,8 +58,9 @@ public class DatabaseHandler {
         return rs;
     }
 
-    public static <T extends AttributesGetter> void insertIntoTable(T obj) throws SQLException
+    public static <T extends AttributesGetter> EventTypes.Return insertIntoTable(T obj)
     {
+        EventTypes.Return ret = EventTypes.Return.SUCCESS;
         String request = "insert into ";
         String tableName = obj.getClass().getSimpleName();
 
@@ -62,9 +72,14 @@ public class DatabaseHandler {
         String fdType;
         for (int i=0; i<fd.length; i++)
         {
+            if(fd[i].getName().equals("id"))
+                continue;
             request = request + fd[i].getName();
             fdType = fd[i].getType().getSimpleName();
-            values = values + obj.getByName(fd[i].getName());
+            if (fdType.equals("String") || fdType.equals("Date"))
+                values = values +"'"+ obj.getByName(fd[i].getName()) + "'";
+            else
+                values = values + obj.getByName(fd[i].getName());
 
 
             if(i!=fd.length-1) {
@@ -76,11 +91,19 @@ public class DatabaseHandler {
         request = request + ")" + values +")";
 
 
-
+        //String sql = "insert into EventInfo(eTitle,eLocation,eStart,eEnd,eDescription,eOrgName,ePrice,eAvailable,eReserved) values ('event1','UH','2017-02-17 - 10:00:00','2017-02-17 - 10:00:00','this is event1','org1',7.0,20,0)";
 //        System.out.println(request);
+//        return EventTypes.Return.SUCCESS;
+        try {
+            Statement stmt = con.createStatement();
+            int rs = stmt.executeUpdate(request);
+            System.out.println(rs);
+            return ret;
+        }catch (Exception e)
+        {
+            return EventTypes.Return.INSERTFAILED;
 
-        Statement stmt=con.createStatement();
-        ResultSet rs=stmt.executeQuery(request);
+        }
 
     }
 

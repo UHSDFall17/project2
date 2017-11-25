@@ -30,7 +30,7 @@ CREATE TABLE `EventInfo` (
   `eEnd` datetime DEFAULT NULL,
   `eDescription` text,
   `eOrgName` text,
-  `ePrice` float DEFAULT NULL,
+  `ePrice` double DEFAULT NULL,
   `eAvailable` int(11) DEFAULT NULL,
   `eReserved` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
