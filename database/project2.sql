@@ -16,7 +16,7 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `eventinfo`
+-- Table structure for table `EventInfo`
 --
 
 DROP TABLE IF EXISTS `EventInfo`;
@@ -29,22 +29,50 @@ CREATE TABLE `EventInfo` (
   `eStart` datetime DEFAULT NULL,
   `eEnd` datetime DEFAULT NULL,
   `eDescription` text,
-  `eOrgName` text,
+  `eOrgId` int(11) DEFAULT NULL,
   `ePrice` double DEFAULT NULL,
   `eAvailable` int(11) DEFAULT NULL,
   `eReserved` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `EventInfo`
+--
+
+LOCK TABLES `EventInfo` WRITE;
+/*!40000 ALTER TABLE `EventInfo` DISABLE KEYS */;
+INSERT INTO `EventInfo` VALUES (1,'event 1','uH','2017-11-24 17:18:00','2017-11-24 17:18:00','event1 description',1,7.25,20,0),(2,'event1','UH','2017-01-02 10:00:00','2017-01-03 10:00:00','this is event1',1,7,20,0),(3,'event1','UH','2017-01-02 10:00:00','2017-01-03 10:00:00','this is event1',1,7,20,0),(4,'event1','UH','2017-01-02 10:00:00','2017-01-03 10:00:00','this is event1',1,7,20,0),(5,'event3','UH','2017-10-01 10:00:00','2017-10-02 10:00:00','hello event1',1,100,20,0),(6,'event1','UH','2017-01-02 10:00:00','2017-01-03 10:00:00','this is event1',1,7,20,0),(7,'event3','UH','2017-10-01 10:00:00','2017-10-02 10:00:00','hello event1',1,100,20,0);
+/*!40000 ALTER TABLE `EventInfo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `UserInfo`
+--
+
+DROP TABLE IF EXISTS `UserInfo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `UserInfo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userName` text,
+  `firstName` text,
+  `lastName` text,
+  `email` text,
+  `password` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `eventinfo`
+-- Dumping data for table `UserInfo`
 --
 
-LOCK TABLES `EventInfo` WRITE;
-/*!40000 ALTER TABLE `EventInfo` DISABLE KEYS */;
-INSERT INTO `EventInfo` VALUES (1,'hello event','UH','2017-11-16 10:00:00','2017-11-16 11:00:00','description','orgname',7.4,20,0);
-/*!40000 ALTER TABLE `EventInfo` ENABLE KEYS */;
+LOCK TABLES `UserInfo` WRITE;
+/*!40000 ALTER TABLE `UserInfo` DISABLE KEYS */;
+INSERT INTO `UserInfo` VALUES (1,'nour.smaoui','nour','smaoui','nour@cs.uh.edu','1000:824e6c27f6c5345c4001acd46717cd83:1641bee71cfa3f45');
+/*!40000 ALTER TABLE `UserInfo` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -56,4 +84,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-16 15:37:49
+-- Dump completed on 2017-11-26 10:03:41
