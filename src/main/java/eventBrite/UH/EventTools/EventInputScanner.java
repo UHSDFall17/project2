@@ -12,13 +12,13 @@ public class EventInputScanner
 
 	public static Return continueOrReset(String featureName)
 	{
-		System.out.println(featureName + ": [Continue/cancel]");
+		System.out.println(featureName + ": Continue ?[y/n]");
 		String resp = sc.nextLine();
 
-		if(resp.toUpperCase().equals("CANCEL"))
+		if(resp.toUpperCase().equals("N"))
 			return Return.RESET;
 
-		if (resp.toUpperCase().equals("CONTINUE"))
+		if (resp.toUpperCase().equals("Y"))
 			return Return.CONTINUE;
 
 		Return.printError(Return.EWRONGINPUT);
