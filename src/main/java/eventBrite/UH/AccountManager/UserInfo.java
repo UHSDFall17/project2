@@ -1,6 +1,8 @@
 package eventBrite.UH.AccountManager;
 
-public class UserInfo
+import eventBrite.UH.EventTools.AttributesGetter;
+
+public class UserInfo implements AttributesGetter
 {
 	private int 	id;
 	private String 	userName;
@@ -32,4 +34,24 @@ public class UserInfo
 	public void setEmail(String email)		{this.email = email;}	
 	public void setPassword(String  pWord) 	{this.password = pWord;}
 
+	@Override
+	public Object getByName(String Name) {
+
+		switch (Name) {
+			case "id":
+				return getId();
+			case "userName":
+				return getUsername();
+			case "firstName":
+				return getFirstname();
+			case "lastName":
+				return getLastname();
+			case "email":
+				return getEmail();
+			case "password":
+				return getPassword();
+			default:
+				return null;
+		}
+	}
 }
