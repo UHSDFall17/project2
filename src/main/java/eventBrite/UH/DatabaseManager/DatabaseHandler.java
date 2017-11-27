@@ -10,18 +10,12 @@ public class DatabaseHandler {
 
     private static Connection con;
 
-    public static EventTypes.Return connectToDatabase()
-    {
-
-        try {
+    public static EventTypes.Return connectToDatabase() throws ClassNotFoundException, SQLException {
 
             Class.forName("com.mysql.jdbc.Driver");
 
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/project2?autoReconnect=true&useSSL=false","root","Project2!" );
-        }
-        catch (Exception e) {
-            return EventTypes.Return.CONNECTIONFAILED;
-        }
+
 
     return EventTypes.Return.SUCCESS;
 
@@ -42,18 +36,13 @@ public class DatabaseHandler {
     }
 
 
-    public static ResultSet  selectFromDatabase(String request)
-    {
-        ResultSet rs;
-        try {
-            Statement stmt = con.createStatement();
+    public static ResultSet  selectFromDatabase(String request) throws SQLException {
+        ResultSet rs = null;
 
-            rs = stmt.executeQuery(request);
-        }
-        catch(Exception e)
-        {
-            return null;
-        }
+        Statement stmt = con.createStatement();
+
+        rs = stmt.executeQuery(request);
+
 
         return rs;
     }
@@ -91,9 +80,6 @@ public class DatabaseHandler {
         request = request + ")" + values +")";
 
 
-        //String sql = "insert into EventInfo(eTitle,eLocation,eStart,eEnd,eDescription,eOrgName,ePrice,eAvailable,eReserved) values ('event1','UH','2017-02-17 - 10:00:00','2017-02-17 - 10:00:00','this is event1','org1',7.0,20,0)";
-//        System.out.println(request);
-//        return EventTypes.Return.SUCCESS;
         try {
             Statement stmt = con.createStatement();
             int rs = stmt.executeUpdate(request);
@@ -107,46 +93,52 @@ public class DatabaseHandler {
 
     }
 
-//    public static <T extends AttributesGetter> void updateTable(T obj) throws SQLException
-//    {
-//        String request = "insert into ";
-//        String tableName = obj.getClass().getSimpleName();
-//
-//        request = request + tableName + "(";
-//
-//        Field[] fd = obj.getClass().getDeclaredFields();
-//
-//        String values = " values (";
-//        String fdType;
-//        for (int i=0; i<fd.length; i++)
-//        {
-//            request = request + fd[i].getName();
-//            fdType = fd[i].getType().getSimpleName();
-//            values = values + obj.getByName(fd[i].getName());
-//
-//
-//            if(i!=fd.length-1) {
-//                request = request + ",";
-//                values = values + ",";
-//            }
-//        }
-//
-//        request = request + ")" + values +")";
-//
-//
-//
-////        System.out.println(request);
-//
-//        Statement stmt=con.createStatement();
-//        ResultSet rs=stmt.executeQuery(request);
-//
-//    }
-//    public void createTable(String tableName, Map<String, Class<?>> map)
-//    {
-//        if(map.get("hello") == String.class)
-//        {
-//
-//        }
-//
-//    }
+    public static <T extends AttributesGetter> EventTypes.Return updateTable(T obj) throws SQLException
+    {
+
+        EventTypes.Return ret = EventTypes.Return.SUCCESS;
+
+        String request = "update ";
+        String tableName = obj.getClass().getSimpleName();
+
+        request = request + tableName + " set ";
+
+        Field[] fd = obj.getClass().getDeclaredFields();
+
+        String fdType;
+        for (int i=0; i<fd.length; i++)
+        {
+            if(fd[i].getName().equals("id"))
+                continue;
+
+            request = request + fd[i].getName() + " = ";
+            fdType = fd[i].getType().getSimpleName();
+            if (fdType.equals("String") || fdType.equals("Date"))
+                request = request +"'"+ obj.getByName(fd[i].getName()) + "'";
+            else
+                request = request + obj.getByName(fd[i].getName());
+
+
+
+
+            if(i!=fd.length-1) {
+                request = request + ",";
+
+            }
+        }
+
+        request = request + " where id =" + obj.getByName("id");
+
+
+
+        try {
+            Statement stmt = con.createStatement();
+            int rs = stmt.executeUpdate(request);
+            return ret;
+        }catch (Exception e)
+        {
+            return EventTypes.Return.UPDATEFAILED;
+
+        }
+    }
 }
