@@ -52,11 +52,14 @@ public class EventTypes
 		SELECTFAILED		(22, "Select from table failed"),
 		EVENTNOTFOUND		(23, "event not found"),
 		INSERTFAILED		(24, "insert into table failed"),
-		CLOSEFAILED			(25, "closing db failed"),
+		UPDATEFAILED		(25, "insert into table failed"),
+		CLOSEFAILED			(26, "closing db failed"),
 		// return codes for signals 31-50
 		RESET				(31, "Reload Main Page"),
 		CONTINUE			(32, "Continue"),
 		EXIT 				(32, "Exit Application"),
+		//return codes for search 51-60
+		EMPTYLIST			(51, "No events were found"),
 		// return codes for general usage 100:
 		EXCEPTIONRAISED 	(101, "Exception Raised"),
 		EPHONEFORMAT 		(102, "Wrong Phone Format"),
