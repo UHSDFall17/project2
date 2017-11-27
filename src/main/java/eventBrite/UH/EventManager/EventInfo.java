@@ -59,7 +59,7 @@ public class EventInfo implements AttributesGetter {
             this.eStart = new SimpleDateFormat("MM/dd/yy - HH:mm").parse(eStart);
             this.eEnd = new SimpleDateFormat("MM/dd/yy - HH:mm").parse(eEnd);
         } catch (ParseException e) {
-            e.printStackTrace();
+            return EventTypes.Return.GENERALERROR;
         }
 
         this.eDescription = eDescription;
@@ -199,11 +199,11 @@ public class EventInfo implements AttributesGetter {
     }
 
     public String geteStartForDB() {
-        return new SimpleDateFormat("yyyy-MM-dd - HH:mm:ss").format(eStart);
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(eStart);
     }
 
     public String geteEndForDB() {
-        return new SimpleDateFormat("yyyy-MM-dd - HH:mm:ss").format(eEnd);
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(eEnd);
     }
 
     public String geteDescription() {
