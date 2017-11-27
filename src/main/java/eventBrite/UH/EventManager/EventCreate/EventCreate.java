@@ -1,5 +1,6 @@
 package eventBrite.UH.EventManager;
 
+import eventBrite.UH.EventTools.EventInputScanner;
 import eventBrite.UH.EventTools.EventTypes;
 
 import java.io.InputStream;
@@ -20,10 +21,10 @@ class EventCreate {
         return ec;
     }
 
-    public EventTypes.Return createEvent(InputStream in)
+    public EventTypes.Return createEvent(int userId)
     {
         EventInfo eInfo = new EventInfo();
-        Scanner sc = new Scanner(in);
+        Scanner sc = EventInputScanner.getScanner();
 
         String strIn;
         Date dateIn;
@@ -56,10 +57,8 @@ class EventCreate {
             strIn=readLine(sc);
             eInfo.seteDescription(strIn);
 
-            //organizer name
-            System.out.println("Input the organizer name");
-            intIn=Integer.parseInt(readLine(sc));
-            eInfo.seteOrgId(intIn);
+            //organizer id
+            eInfo.seteOrgId(userId);
 
 
             System.out.println("Input the event available spots (-1 means unlimited spots)");

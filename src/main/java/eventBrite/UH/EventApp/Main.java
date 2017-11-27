@@ -18,7 +18,7 @@ public class Main {
     private static final AccountHandler      accountHandler = AccountHandler.getInstance();
     private static final EventHandler        eventHandler   = EventHandler.getInstance();
     private static final ArrayList<String>   featureList    = new ArrayList<String>(Arrays.asList(
-            "Login/Create Account", "create event", "Exit"));
+            "Login/Create Account", "create event","search event", "Exit"));
 
 
     public static void main(String[] args) {
@@ -110,6 +110,10 @@ public class Main {
             case "create event":
                 System.out.println("you started "+featureList.get(select));
                 userAccount.createEvent();
+                break;
+            case "search event":
+                System.out.println("you started "+featureList.get(select));
+                userAccount.searchEvent();
                 break;
             case "exit":
             default:

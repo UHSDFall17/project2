@@ -1,5 +1,6 @@
 package eventBrite.UH.EventManager;
 
+import eventBrite.UH.EventTools.EventInputScanner;
 import eventBrite.UH.EventTools.EventTypes;
 import org.junit.After;
 import org.junit.Before;
@@ -26,27 +27,36 @@ public class EventCreateTest {
     }
 
     @Test
-    public void TestcreateEvent()
-    {
+    public void TestcreateEvent() throws FileNotFoundException {
         EventTypes.Return ret = null;
-        try {
-            ret = eventCreate.createEvent(new FileInputStream("./src/test/testInputs/testEventCreate"));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+
+        Scanner scanner = new Scanner(new FileInputStream("./src/test/testInputs/testEventCreate"));
+        EventInputScanner.setScanner(scanner);
+
+        ret = eventCreate.createEvent(1);
+
+
         assertEquals(EventTypes.Return.SUCCESS,ret);
 
     }
 
     @Test(expected = java.lang.AssertionError.class)
     public void TestcreateEventAssertException() throws FileNotFoundException {
-        EventTypes.Return ret = eventCreate.createEvent(new FileInputStream("./src/test/testInputs/testEventCreate2"));
+
+        Scanner scanner = new Scanner(new FileInputStream("./src/test/testInputs/testEventCreate2"));
+        EventInputScanner.setScanner(scanner);
+
+        EventTypes.Return ret = eventCreate.createEvent(1);
         assertEquals(EventTypes.Return.SUCCESS,ret);
     }
 
     @Test
     public void TestcreateEventEmptyStringException() throws FileNotFoundException {
-        EventTypes.Return ret = eventCreate.createEvent(new FileInputStream("./src/test/testInputs/testEventCreate3"));
+
+        Scanner scanner = new Scanner(new FileInputStream("./src/test/testInputs/testEventCreate3"));
+        EventInputScanner.setScanner(scanner);
+
+        EventTypes.Return ret = eventCreate.createEvent(1);
         assertEquals(EventTypes.Return.GENERALERROR,ret);
     }
 

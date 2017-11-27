@@ -9,7 +9,7 @@ class MemberAccount extends UserAccount
 			isMember = true;
 	}
 
-	public void createEvent() {eventHandler.create();}
+	public void createEvent() {eventHandler.create(userInfo.getId());}
 	public void updateEvent() {eventHandler.update();}
 	public void deleteEvent() {eventHandler.delete();}
 }
