@@ -67,4 +67,12 @@ public class AccountHandlerTest {
 		FunctionToTest loginFunc = () -> accountHandler.login();
 		testFunctionOutput("Continue\njohnsgmail.com\nazert1234\ncancel", expectedRet, loginFunc);
 	}
+
+	@Test
+	public void testLoginWrongPassword() throws Exception
+	{
+		String expectedRet = Return.EWRONGPASSWD.toString();
+		FunctionToTest loginFunc = () -> accountHandler.login();
+		testFunctionOutput("Continue\njohn2017@gmail.com\nreal1234\ncancel", expectedRet, loginFunc);
+	}
 }
