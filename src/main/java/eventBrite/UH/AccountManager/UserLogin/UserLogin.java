@@ -1,10 +1,12 @@
 package eventBrite.UH.AccountManager;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
+import eventBrite.UH.DatabaseManager.DBUserInfo;
 import eventBrite.UH.EventTools.EventTypes.Return;
 import eventBrite.UH.EventTools.MailNotifier;
 import eventBrite.UH.EventTools.EventInputScanner;
@@ -58,7 +60,13 @@ class UserLogin
 		if(!MailNotifier.checkEmailAddressFormat(email))
 			return Return.EEMAILFORMAT;
 
-		// userInfo = DB.getUserInfoByEmail(email);
+		try {
+			userInfo = DBUserInfo.getUserInfoByUserEmail(email);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 
 		if(userInfo == null)
 			return Return.EACCOUNTNOTFOUND;
