@@ -55,25 +55,35 @@ public class EventSearch {
                 case 5:
                     ret = EventInputScanner.continueOrReset("Return to previous menu");
                     if (ret == EventTypes.Return.CONTINUE) {
-                        return EventTypes.Return.RESET;
+                        return EventTypes.Return.SUCCESS;
                     }
                 default:
-                    break;
+                    throw new Exception();
 
             }
 
             if (ret == EventTypes.Return.SUCCESS) {
-                ret = EventInputScanner.continueOrReset("Join an event");
+                ret = EventInputScanner.continueOrReset("Show an event");
 
                 if (ret == EventTypes.Return.CONTINUE) {
-                    System.out.println("Which event do you want to join ?");
+                    System.out.println("Which event do you want to display ?");
                     int eindex = Integer.parseInt(sc.nextLine());
-                    //EventHandler.getInstance().join(eList.get(eindex));
+                    System.out.println(eList.get(eindex).toStringForJoiner());
+
+                    ret = EventInputScanner.continueOrReset("Join This event");
+                    if (ret == EventTypes.Return.CONTINUE) {
+                        //EventHandler.getInstance().join(eList.get(eindex));
+                    }
 
                 }
 
-            } else if (ret == EventTypes.Return.EMPTYLIST){
-                EventTypes.Return.printError(ret);
+
+
+
+
+            } else if (ret == EventTypes.Return.EMPTYLIST)
+            {
+                    EventTypes.Return.printError(ret);
             }
 
             ret = EventInputScanner.continueOrReset("New search");
@@ -85,12 +95,10 @@ public class EventSearch {
         }
         catch(Exception e)
         {
-            System.out.println(e);
             return searchEvent();
-
         }
 
-        return ret;
+        return EventTypes.Return.SUCCESS;
     }
 
     private EventTypes.Return SearchAll() throws ParseException, SQLException, ClassNotFoundException {

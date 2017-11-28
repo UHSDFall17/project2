@@ -10,6 +10,6 @@ class MemberAccount extends UserAccount
 	}
 
 	public void createEvent() {eventHandler.create(userInfo.getId());}
-	public void updateEvent() {eventHandler.update();}
-	public void deleteEvent() {eventHandler.delete();}
+	public void updateEvent() {eventHandler.update(userInfo.getId());}
+	public void deleteEvent() {eventHandler.delete(userInfo.getId());}
 }
