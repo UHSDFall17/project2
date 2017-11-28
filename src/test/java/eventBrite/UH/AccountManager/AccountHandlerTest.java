@@ -75,4 +75,12 @@ public class AccountHandlerTest {
 		FunctionToTest loginFunc = () -> accountHandler.login();
 		testFunctionOutput("Continue\njohn2017@gmail.com\nreal1234\ncancel", expectedRet, loginFunc);
 	}
+
+	@Test
+	public void testLoginPasswordMatch() throws Exception
+	{
+		String expectedRet = Return.EPASSWDMATCH.toString();
+		FunctionToTest loginFunc = () -> accountHandler.login();
+		testFunctionOutput("Continue\njohn2018@gmail.com\nreal1234\ncancel", expectedRet, loginFunc);
+	}
 }
