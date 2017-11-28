@@ -9,28 +9,36 @@ import java.sql.*;
 public class DatabaseHandler {
 
     private static Connection con;
+    private static String db = "project2";
+    private static String user = "root";
+
+    public static void setDB(String database)
+    {
+        db = database;
+    }
+
+    public static void setUser(String User)
+    {
+        user = User;
+    }
 
     public static EventTypes.Return connectToDatabase() throws ClassNotFoundException, SQLException {
 
             Class.forName("com.mysql.jdbc.Driver");
 
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/project2?autoReconnect=true&useSSL=false","root","Project2!" );
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+db+"?autoReconnect=true&useSSL=false",user,"Project2!" );
 
 
     return EventTypes.Return.SUCCESS;
 
     }
 
-    public static EventTypes.Return closeConnection() {
+    public static EventTypes.Return closeConnection() throws SQLException {
 
         EventTypes.Return ret = EventTypes.Return.SUCCESS;
-        try {
-            con.close();
-        }
-        catch (Exception e)
-        {
-            return EventTypes.Return.CLOSEFAILED;
-        }
+
+        con.close();
+
 
         return ret;
     }
@@ -47,8 +55,7 @@ public class DatabaseHandler {
         return rs;
     }
 
-    public static <T extends AttributesGetter> EventTypes.Return insertIntoTable(T obj)
-    {
+    public static <T extends AttributesGetter> EventTypes.Return insertIntoTable(T obj) throws SQLException {
         EventTypes.Return ret = EventTypes.Return.SUCCESS;
         String request = "insert into ";
         String tableName = obj.getClass().getSimpleName();
@@ -80,21 +87,16 @@ public class DatabaseHandler {
         request = request + ")" + values +")";
 
 
-        try {
-            Statement stmt = con.createStatement();
-            int rs = stmt.executeUpdate(request);
-            System.out.println(rs);
-            return ret;
-        }catch (Exception e)
-        {
-            return EventTypes.Return.INSERTFAILED;
 
-        }
+        Statement stmt = con.createStatement();
+        int rs = stmt.executeUpdate(request);
+        System.out.println(rs);
+        return ret;
+
 
     }
 
-    public static <T extends AttributesGetter> EventTypes.Return updateTable(T obj) throws SQLException
-    {
+    public static <T extends AttributesGetter> EventTypes.Return updateTable(T obj) throws SQLException {
 
         EventTypes.Return ret = EventTypes.Return.SUCCESS;
 
@@ -131,14 +133,27 @@ public class DatabaseHandler {
 
 
 
-        try {
-            Statement stmt = con.createStatement();
-            int rs = stmt.executeUpdate(request);
-            return ret;
-        }catch (Exception e)
-        {
-            return EventTypes.Return.UPDATEFAILED;
 
-        }
+        Statement stmt = con.createStatement();
+        int rs = stmt.executeUpdate(request);
+        return ret;
+
+    }
+    public static <T extends AttributesGetter> EventTypes.Return deleteFromTable(T obj) throws SQLException
+    {
+        EventTypes.Return ret = EventTypes.Return.SUCCESS;
+
+        String request = "delete from ";
+        String tableName = obj.getClass().getSimpleName();
+
+        request = request + tableName + " where id =" + obj.getByName("id");
+
+
+
+        Statement stmt = con.createStatement();
+        int rs = stmt.executeUpdate(request);
+        return ret;
+
+
     }
 }

@@ -1,13 +1,16 @@
 package eventBrite.UH.EventManager;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import eventBrite.UH.AccountManager.UserInfo;
 import eventBrite.UH.DatabaseManager.DBEventInfo;
+import eventBrite.UH.DatabaseManager.DBUserInfo;
 import eventBrite.UH.EventTools.AttributesGetter;
 import eventBrite.UH.EventTools.EventTypes;
 
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -123,7 +126,7 @@ public class EventInfo implements AttributesGetter {
         this.eReserved --;
     }
 
-    public void setePrice(float ePrice) {
+    public void setePrice(double ePrice) {
         this.ePrice = ePrice;
     }
 
@@ -224,5 +227,38 @@ public class EventInfo implements AttributesGetter {
 
     public int geteReserved() {
         return eReserved;
+    }
+
+    public String toStringForOrganizer(){
+        String info = "";
+
+        info = info + "0 - Title : " + eTitle + "\n";
+        info = info + "1 - Location : " + eLocation + "\n";
+        info = info + "2 - Start date : " + geteStart() + "\n";
+        info = info + "3 - End date : " + geteEnd() + "\n";
+        info = info + "4 - Price : " + ePrice + "\n";
+        info = info + "5 - Available : " + eAvailable + "\n";
+        info = info + "6 - Reserved : " + eReserved + "\n";
+
+        return info;
+
+    }
+
+    public String toStringForJoiner() throws SQLException, ClassNotFoundException {
+        String info = "";
+
+        UserInfo ui= null;
+        ui = DBUserInfo.getUserInfoByUserId(eOrgId);
+        info = info + "Title : " + eTitle + "\n";
+        info = info + "Location : " + eLocation + "\n";
+        info = info + "Start date : " + geteStart() + "\n";
+        info = info + "End date : " + geteEnd() + "\n";
+        info = info + "Organizer Name : " + ui.getFirstname() + " " + ui.getLastname() + "\n";
+        info = info + "Price : " + ePrice + "\n";
+        info = info + "Remaining spots : " + Math.max(0,eAvailable-eReserved) + "\n";
+
+        return info;
+
+
     }
 }

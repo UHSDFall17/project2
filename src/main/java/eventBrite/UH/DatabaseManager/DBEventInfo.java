@@ -18,15 +18,13 @@ public static ArrayList<EventInfo> getAllEvents() throws SQLException, ClassNotF
 
     ret = DatabaseHandler.connectToDatabase();
 
-    if(!ret.equals(EventTypes.Return.SUCCESS))
-        return null;
+
 
     String request = "select * from EventInfo";
 
     ResultSet rs = DatabaseHandler.selectFromDatabase(request);
 
-    if(rs == null)
-        return null;
+
 
 
         while(rs.next()) {
@@ -46,15 +44,12 @@ public static ArrayList<EventInfo> getEventsInfoByPriceRange(double min, double 
 
     ret = DatabaseHandler.connectToDatabase();
 
-    if(!ret.equals(EventTypes.Return.SUCCESS))
-        return null;
+
 
     String request = "select * from EventInfo where ePrice <= "+max+" and ePrice >= "+min;
 
     ResultSet rs = DatabaseHandler.selectFromDatabase(request);
 
-    if(rs == null)
-        return null;
 
 
         while(rs.next()) {
@@ -68,6 +63,7 @@ public static ArrayList<EventInfo> getEventsInfoByPriceRange(double min, double 
 
     return eList;
 }
+
 public static ArrayList<EventInfo> getEventsInfoByEventLocation(String location) throws SQLException, ClassNotFoundException, ParseException {
 
 
@@ -77,15 +73,12 @@ public static ArrayList<EventInfo> getEventsInfoByEventLocation(String location)
 
     ret = DatabaseHandler.connectToDatabase();
 
-    if(!ret.equals(EventTypes.Return.SUCCESS))
-        return null;
 
     String request = "select * from EventInfo where eLocation like '%"+location+"%'";
 
     ResultSet rs = DatabaseHandler.selectFromDatabase(request);
 
-    if(rs == null)
-        return null;
+
 
 
         while(rs.next()) {
@@ -109,15 +102,13 @@ public static ArrayList<EventInfo> getEventsInfoByEventTitle(String title) throw
 
     ret = DatabaseHandler.connectToDatabase();
 
-    if(!ret.equals(EventTypes.Return.SUCCESS))
-        return null;
+
 
     String request = "select * from EventInfo where eTitle like '%"+title+"%'";
 
     ResultSet rs = DatabaseHandler.selectFromDatabase(request);
 
-    if(rs == null)
-        return null;
+
 
 
         while(rs.next()) {
@@ -132,6 +123,35 @@ public static ArrayList<EventInfo> getEventsInfoByEventTitle(String title) throw
     return eList;
 }
 
+public static ArrayList<EventInfo> getEventsInfoByEventOrganizer(int userId) throws SQLException, ClassNotFoundException, ParseException {
+
+
+    EventTypes.Return ret = EventTypes.Return.SUCCESS;
+    ArrayList<EventInfo> eList = new ArrayList<>();
+
+
+    ret = DatabaseHandler.connectToDatabase();
+
+
+    String request = "select * from EventInfo where eOrgId = "+userId;
+
+    ResultSet rs = DatabaseHandler.selectFromDatabase(request);
+
+
+
+
+    while(rs.next()) {
+
+        EventInfo eventInfo = generateEventInfoFromResultSet(rs);
+        eList.add(eventInfo);
+
+
+    }
+
+
+    return eList;
+}
+
 public static EventInfo getEventInfoByEventId(int id) throws SQLException, ClassNotFoundException, ParseException {
 
     EventTypes.Return ret = EventTypes.Return.SUCCESS;
@@ -140,15 +160,11 @@ public static EventInfo getEventInfoByEventId(int id) throws SQLException, Class
 
     ret = DatabaseHandler.connectToDatabase();
 
-    if(!ret.equals(EventTypes.Return.SUCCESS))
-        return null;
 
     String request = "select * from EventInfo where id="+id;
 
     ResultSet rs = DatabaseHandler.selectFromDatabase(request);
 
-    if(rs == null)
-        return null;
 
 
     rs.next();
@@ -158,53 +174,75 @@ public static EventInfo getEventInfoByEventId(int id) throws SQLException, Class
     return eventInfo;
 }
 
-    public static EventTypes.Return insertEventIntoDB(EventInfo ei) throws SQLException, ClassNotFoundException {
+    public static EventTypes.Return insertEventIntoDB(EventInfo ei)
+    {
 
         EventTypes.Return ret = EventTypes.Return.SUCCESS;
 
-        ret = DatabaseHandler.connectToDatabase();
+        try {
+            ret = DatabaseHandler.connectToDatabase();
 
-        if(!ret.equals(EventTypes.Return.SUCCESS))
-            return ret;
 
-        ret = DatabaseHandler.insertIntoTable(ei);
+            ret = DatabaseHandler.insertIntoTable(ei);
 
-        if(!ret.equals(EventTypes.Return.SUCCESS)) {
 
             DatabaseHandler.closeConnection();
-            return ret;
+        }
+        catch (Exception e)
+        {
+            EventTypes.Return.printError(EventTypes.Return.INSERTFAILED);
+            return EventTypes.Return.INSERTFAILED;
         }
 
-        ret = DatabaseHandler.closeConnection();
 
         return ret;
 
     }
 
-    public static EventTypes.Return updateEvent(EventInfo ei) throws SQLException, ClassNotFoundException {
+    public static EventTypes.Return updateEvent(EventInfo ei){
 
         EventTypes.Return ret = EventTypes.Return.SUCCESS;
 
-        ret = DatabaseHandler.connectToDatabase();
-
-        if(!ret.equals(EventTypes.Return.SUCCESS))
-            return ret;
-
         try {
+
+            ret = DatabaseHandler.connectToDatabase();
+
+
             ret = DatabaseHandler.updateTable(ei);
-        } catch (SQLException e) {
-            e.printStackTrace();
+
+
+            ret = DatabaseHandler.closeConnection();
+        }catch (Exception e)
+        {
+            EventTypes.Return.printError(EventTypes.Return.UPDATEFAILED);
+            return EventTypes.Return.UPDATEFAILED;
         }
-
-        if(!ret.equals(EventTypes.Return.SUCCESS)) {
-
-            DatabaseHandler.closeConnection();
-            return ret;
-        }
-
-        ret = DatabaseHandler.closeConnection();
 
         return ret;
+
+    }
+
+    public static EventTypes.Return deleteEvent(EventInfo ei) {
+        EventTypes.Return ret = EventTypes.Return.SUCCESS;
+
+        try {
+            ret = DatabaseHandler.connectToDatabase();
+
+
+            ret = DatabaseHandler.deleteFromTable(ei);
+
+
+            DatabaseHandler.closeConnection();
+        }
+        catch (Exception e)
+        {
+            EventTypes.Return.printError(EventTypes.Return.DELETEFAILED);
+            return EventTypes.Return.DELETEFAILED;
+        }
+
+
+        return ret;
+
 
     }
 
