@@ -42,6 +42,24 @@ public class EventInfoTest {
     }
 
     @Test
+    public void testSetEventInfoWrongDateFormat() throws Exception
+    {
+        EventTypes.Return ret;
+        ret = eventInfo.SetEventInfos(1,"event1","UH","01-02-17 - 10:00",
+                "01/03/17 - 10:00","this is event1",1,7,
+                20,0);
+        assertEquals(EventTypes.Return.GENERALERROR, ret);
+    }
+
+    @Test
+    public void testGetByNameWrongAttribute()
+    {
+        Object ret;
+        ret = eventInfo.getByName("test");
+        assertEquals(null, ret);
+    }
+
+    @Test
     public void TestSeteTitle() {
 
         String sref = "event2";
