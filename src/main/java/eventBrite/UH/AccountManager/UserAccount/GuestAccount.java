@@ -14,4 +14,5 @@ class GuestAccount extends UserAccount
 	public void createEvent() {System.out.println(EventTypes.Return.EINSUFFPRIV + guestWarning);}
 	public void updateEvent() {System.out.println(EventTypes.Return.EINSUFFPRIV + guestWarning);}
 	public void deleteEvent() {System.out.println(EventTypes.Return.EINSUFFPRIV + guestWarning);}
+	public void updateProfile() {System.out.println(EventTypes.Return.EINSUFFPRIV + guestWarning);}	
 }

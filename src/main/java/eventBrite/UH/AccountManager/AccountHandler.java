@@ -15,6 +15,7 @@ public class AccountHandler
 		passwdHash = new PasswordHash();
 	}
 	
+	public PasswordHash getPasswordHash() {return passwdHash;}
 	public static AccountHandler getInstance() {return accountHandler;}
 
 	public UserAccount login()

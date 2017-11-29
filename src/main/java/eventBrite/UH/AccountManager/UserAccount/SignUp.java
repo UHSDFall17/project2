@@ -2,11 +2,12 @@ package eventBrite.UH.AccountManager;
 
 import java.util.Scanner;
 import java.util.ArrayList;
-import eventBrite.UH.EventTools.MailNotifier;
-import eventBrite.UH.EventTools.EventTypes.Return;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import eventBrite.UH.EventTools.MailNotifier;
+import eventBrite.UH.EventTools.EventTypes.Return;
 import eventBrite.UH.EventTools.EventInputScanner;
+import eventBrite.UH.DatabaseManager.DBUserInfo;
 
 class SignUp 
 {
@@ -86,6 +87,7 @@ class SignUp
 			return Return.EXCEPTIONRAISED;
 		}
 		userInfo = new UserInfo(firstName, lastName, email, hashedPassword);
+		DBUserInfo.insertUserIntoDB(userInfo);
 		return Return.SUCCESS;
 	}	
 }

@@ -115,8 +115,6 @@ public class MailNotifierTest
 		assertEquals(true, boolActualValue);
 	}
 
-	// Use your gmail and password to test this functionality.
-	//@Ignore("It needs personal information (Gmail + passwords)")
 	@Test
 	public void testMsgIsReadyToSend_SendMail() throws Exception
 	{

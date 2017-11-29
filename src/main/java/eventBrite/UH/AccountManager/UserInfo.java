@@ -39,6 +39,18 @@ public class UserInfo implements AttributesGetter
 		return !(this.firstName.isEmpty() || this.lastName.isEmpty() || this.email.isEmpty());
 	}
 
+	public String toStringUserInfo()
+	{
+		String info = "";
+
+		info = info + "0 - First Name : " + firstName + "\n";
+		info = info + "1 - Last Name : " + lastName + "\n";
+		info = info + "2 - E-mail: " + email + "\n";
+		info = info + "3 - Password: ********" + "\n";
+
+		return info;
+	}
+	
 	@Override
 	public Object getByName(String Name) {
 

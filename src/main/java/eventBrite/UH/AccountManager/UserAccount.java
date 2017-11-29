@@ -21,4 +21,5 @@ public abstract class UserAccount
 	public abstract void createEvent();
 	public abstract void updateEvent();	
 	public abstract void deleteEvent();
+	public abstract void updateProfile();
 }

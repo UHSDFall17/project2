@@ -60,16 +60,14 @@ class UserLogin
 		if(!MailNotifier.checkEmailAddressFormat(email))
 			return Return.EEMAILFORMAT;
 
-		try {
+		try 
+		{
 			userInfo = DBUserInfo.getUserInfoByUserEmail(email);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-
-		if(userInfo == null)
+		} 
+		catch (SQLException | ClassNotFoundException e) 
+		{
 			return Return.EACCOUNTNOTFOUND;
+		}
 
 		try
 		{

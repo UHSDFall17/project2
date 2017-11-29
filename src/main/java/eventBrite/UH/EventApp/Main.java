@@ -18,8 +18,8 @@ public class Main {
     private static final AccountHandler      accountHandler = AccountHandler.getInstance();
     private static final EventHandler        eventHandler   = EventHandler.getInstance();
     private static final ArrayList<String>   featureList    = new ArrayList<String>(Arrays.asList(
-            "Login/Create Account", "create an event","update my events","delete an event","search event", "Exit"));
-
+            "Login/Create Account", "create an event","update my events","delete an event",
+            "search event", "Update Profile", "Exit"));
 
     public static void main(String[] args) {
         Return ret = Return.SUCCESS;
@@ -125,6 +125,10 @@ public class Main {
                 System.out.println("you started "+featureList.get(select));
                 userAccount.deleteEvent();
                 break;
+            case "Update Profile":
+                System.out.println("you started "+featureList.get(select));
+                userAccount.updateProfile();
+                break;            
             case "exit":
             default:
                 return Return.EXIT;
