@@ -72,7 +72,7 @@ public class EventSearch {
 
                     ret = EventInputScanner.continueOrReset("Join This event");
                     if (ret == EventTypes.Return.CONTINUE) {
-                        //EventHandler.getInstance().join(eList.get(eindex));
+                        EventHandler.getInstance().join(eList.get(eindex));
                     }
 
                 }

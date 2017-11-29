@@ -33,6 +33,7 @@ public class Main {
         System.out.println(ret);
     }
 
+    public static UserAccount getUserAccount() {return userAccount;}
     private static Return loadWelcomePage()
     {
         int resp;

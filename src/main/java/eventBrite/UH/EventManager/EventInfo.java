@@ -130,6 +130,11 @@ public class EventInfo implements AttributesGetter {
         this.ePrice = ePrice;
     }
 
+    public void addeReserved(int quantity) {
+        if(quantity >= 1)
+            this.eReserved += quantity;
+    }
+
     public Object getByName(String name)
     {
         if(name.equals("id"))

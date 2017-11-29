@@ -65,7 +65,10 @@ public class EventTypes
 		EXCEPTIONRAISED 	(101, "Exception Raised"),
 		EPHONEFORMAT 		(102, "Wrong Phone Format"),
 		EINSUFFPRIV			(103, "Insufficient Privileges error"),
-		EWRONGINPUT			(104, "Wrong Input");
+		EWRONGINPUT			(104, "Wrong Input"),
+		EINCOMPLETEREG		(105, "Registration Form is not completely Filled"),
+		ENOEVENT			(106, "No event was selected"),
+		ENOTICKET			(107, "No available tickets");
 
 		private int 	code;
 		private String 	description;

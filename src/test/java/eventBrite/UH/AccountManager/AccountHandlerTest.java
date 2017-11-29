@@ -57,7 +57,7 @@ public class AccountHandlerTest {
 	{
 		String expectedRet = Return.EACCOUNTNOTFOUND.toString();
 		FunctionToTest loginFunc = () -> accountHandler.login();
-		testFunctionOutput("Continue\njohn@gmail.com\nazert1234\ncancel", expectedRet, loginFunc);
+		testFunctionOutput("y\njohn@gmail.com\nazert1234\nN", expectedRet, loginFunc);
 	}
 
 	@Test
@@ -65,7 +65,7 @@ public class AccountHandlerTest {
 	{
 		String expectedRet = Return.EEMAILFORMAT.toString();
 		FunctionToTest loginFunc = () -> accountHandler.login();
-		testFunctionOutput("Continue\njohnsgmail.com\nazert1234\ncancel", expectedRet, loginFunc);
+		testFunctionOutput("Y\njohnsgmail.com\nazert1234\nN", expectedRet, loginFunc);
 	}
 
 	@Test
@@ -73,14 +73,6 @@ public class AccountHandlerTest {
 	{
 		String expectedRet = Return.EWRONGPASSWD.toString();
 		FunctionToTest loginFunc = () -> accountHandler.login();
-		testFunctionOutput("Continue\njohn2017@gmail.com\nreal1234\ncancel", expectedRet, loginFunc);
-	}
-
-	@Test
-	public void testLoginPasswordMatch() throws Exception
-	{
-		String expectedRet = Return.EPASSWDMATCH.toString();
-		FunctionToTest loginFunc = () -> accountHandler.login();
-		testFunctionOutput("Continue\njohn2018@gmail.com\nreal1234\ncancel", expectedRet, loginFunc);
+		testFunctionOutput("y\nnour@cs.uh.edu\nreal1234\nn", expectedRet, loginFunc);
 	}
 }

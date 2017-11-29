@@ -14,7 +14,6 @@ public abstract class UserAccount
 		eventHandler = EventHandler.getInstance();
 	}
 
-	public void 	joinEvent()		{eventHandler.join();}
 	public void 	searchEvent()	{eventHandler.search();}
 	public boolean 	isMember() 		{return isMember;}
 	public UserInfo getUserInfo() 	{return userInfo;}

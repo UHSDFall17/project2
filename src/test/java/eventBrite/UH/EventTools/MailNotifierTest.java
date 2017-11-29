@@ -116,12 +116,12 @@ public class MailNotifierTest
 	}
 
 	// Use your gmail and password to test this functionality.
-	@Ignore("It needs personal information (Gmail + passwords)") 
+	//@Ignore("It needs personal information (Gmail + passwords)")
 	@Test
 	public void testMsgIsReadyToSend_SendMail() throws Exception
 	{
-		mailNotif.setSenderInfo("XXXX@gmail.com", "XXXXX");
-		mailNotif.setEmailInfo("XXXXX@gmail.com", "MailSubject", "MailMsg");
+		mailNotif.setSenderInfo("programmincodetest@gmail.com", "Project2");
+		mailNotif.setEmailInfo("fekiraafat@gmail.com", "MailSubject", "MailMsg");
 		mailNotif.send();
 	}			
 }   
