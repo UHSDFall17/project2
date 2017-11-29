@@ -152,27 +152,27 @@ public static ArrayList<EventInfo> getEventsInfoByEventOrganizer(int userId) thr
     return eList;
 }
 
-public static EventInfo getEventInfoByEventId(int id) throws SQLException, ClassNotFoundException, ParseException {
-
-    EventTypes.Return ret = EventTypes.Return.SUCCESS;
-
-
-
-    ret = DatabaseHandler.connectToDatabase();
-
-
-    String request = "select * from EventInfo where id="+id;
-
-    ResultSet rs = DatabaseHandler.selectFromDatabase(request);
-
-
-
-    rs.next();
-
-    EventInfo eventInfo = generateEventInfoFromResultSet(rs);
-
-    return eventInfo;
-}
+//public static EventInfo getEventInfoByEventId(int id) throws SQLException, ClassNotFoundException, ParseException {
+//
+//    EventTypes.Return ret = EventTypes.Return.SUCCESS;
+//
+//
+//
+//    ret = DatabaseHandler.connectToDatabase();
+//
+//
+//    String request = "select * from EventInfo where id="+id;
+//
+//    ResultSet rs = DatabaseHandler.selectFromDatabase(request);
+//
+//
+//
+//    rs.next();
+//
+//    EventInfo eventInfo = generateEventInfoFromResultSet(rs);
+//
+//    return eventInfo;
+//}
 
     public static EventTypes.Return insertEventIntoDB(EventInfo ei)
     {

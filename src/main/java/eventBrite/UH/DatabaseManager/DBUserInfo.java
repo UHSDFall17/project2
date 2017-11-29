@@ -47,15 +47,11 @@ public static UserInfo getUserInfoByUserId(int id) throws SQLException, ClassNot
 
     ret = DatabaseHandler.connectToDatabase();
 
-    if(!ret.equals(EventTypes.Return.SUCCESS))
-        return null;
 
     String request = "select * from UserInfo where id="+id;
 
     ResultSet rs = DatabaseHandler.selectFromDatabase(request);
 
-    if(rs == null)
-        return null;
 
 
 

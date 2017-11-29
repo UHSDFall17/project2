@@ -57,6 +57,7 @@ public class Main {
         switch(resp)
         {
             case 1:
+                userAccount = null;
                 break;
             case 2:
                 userAccount = accountHandler.login();

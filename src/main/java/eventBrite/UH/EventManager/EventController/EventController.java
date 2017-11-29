@@ -32,6 +32,12 @@ class EventController {
         Scanner sc = EventInputScanner.getScanner();
         EventTypes.Return ret = EventTypes.Return.SUCCESS;
 
+        ret = EventInputScanner.continueOrReset("Create an event");
+        if (ret == EventTypes.Return.RESET)
+        {
+            return EventTypes.Return.RESET;
+        }
+
         String strIn;
         Date dateIn;
         int intIn;
