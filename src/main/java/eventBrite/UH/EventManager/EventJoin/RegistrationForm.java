@@ -99,9 +99,10 @@ class RegistrationForm
 
 	private String getEmailFormatTicket()
 	{
+		String ret = null;
 		if(eventTicket.isApproved())
 		{
-			return (String.format("Dear %s,\n\nThis is a confirmation to attend the event:"
+			ret = (String.format("Dear %s,\n\nThis is a confirmation to attend the event:"
 				+ "\t%s\n\n\tLocation: %s\n\tStart Time: %s\n\tEnd Time: %s\n\tQuantity: %s\n\tType:"
 				+ " %s\n\nPlease print a copy of this document or display this e-mail using an electronic"
 				+ "device. Ammount Charged %.2f$.\nBest Regard,\n\nEventBrite-UH Community Manager.",
@@ -111,7 +112,7 @@ class RegistrationForm
 				eventTicket.getTicketCover()*eventTicket.getTicketQuantity()
 				)); 
 		}
-		return null;
+		return ret;
 	}
 
 	private boolean confirmEmailAddress(String emailConfirm)

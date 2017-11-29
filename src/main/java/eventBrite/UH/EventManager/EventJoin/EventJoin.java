@@ -114,7 +114,7 @@ class EventJoin
 			System.out.println("Enter Your FirstName:");
 			firstName = sc.nextLine();
 			System.out.println("Enter Your LastName:");
-			lastName = sc.nextLine();
+				lastName = sc.nextLine();
 			System.out.println("Enter Your Email:");
 			email = sc.nextLine();   
 		}

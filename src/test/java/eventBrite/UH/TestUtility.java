@@ -6,6 +6,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import static org.junit.Assert.assertEquals;
 
+import eventBrite.UH.EventTools.EventTypes.Return;
 import eventBrite.UH.EventTools.EventInputScanner;
 import java.util.ArrayList;
 
@@ -18,7 +19,7 @@ public abstract class TestUtility
 		public Object execute(ArrayList<Object> paramList);
 	}
 
-	public static void testFunctionOutput(
+	public static void testFunctionOutputError(
 		String input, 
 		String expectedOutput, 
 		FunctionToTest fnct,
@@ -34,6 +35,16 @@ public abstract class TestUtility
 
 		System.out.flush();
 		System.setOut(stdout);
-		System.out.print(out.toString());
 	}
+
+	public static void testFunctionReturn(
+		String input, 
+		Return expectedOutput, 
+		FunctionToTest fnct,
+		ArrayList<Object> paramList) throws Exception
+	{
+		EventInputScanner.setScanner(new Scanner(new ByteArrayInputStream(input.getBytes("UTF-8"))));
+		Return actualReturn  = (Return)fnct.execute(paramList);
+		assertEquals(expectedOutput, actualReturn);
+	}	
 }

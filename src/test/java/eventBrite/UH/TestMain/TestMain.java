@@ -113,4 +113,12 @@ public class TestMain {
         Main.main(null);
 
     }
+
+    @Test
+    public void testMainJoinEventAsMember() throws FileNotFoundException {
+        Scanner scanner = new Scanner(new FileInputStream("./src/test/testInputs/testsMain/testMain14"));
+        EventInputScanner.setScanner(scanner);
+        Main.main(null);
+
+    }    
 }

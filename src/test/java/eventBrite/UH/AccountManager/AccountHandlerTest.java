@@ -34,20 +34,20 @@ public class AccountHandlerTest {
 	public void testLoginNotExistingAccount() throws Exception 
 	{
 		String expectedRet = Return.EACCOUNTNOTFOUND.toString();
-		TestUtility.testFunctionOutput("y\njohn@gmail.com\nazert1234\nN", expectedRet, loginFunc, null);
+		TestUtility.testFunctionOutputError("y\njohn@gmail.com\nazert1234\nN", expectedRet, loginFunc, null);
 	}
 
 	@Test
 	public void testLoginWrongEmail() throws Exception 
 	{
 		String expectedRet = Return.EEMAILFORMAT.toString();
-		TestUtility.testFunctionOutput("Y\njohnsgmail.com\nazert1234\nN", expectedRet, loginFunc, null);
+		TestUtility.testFunctionOutputError("Y\njohnsgmail.com\nazert1234\nN", expectedRet, loginFunc, null);
 	}
 
 	@Test
 	public void testLoginWrongPassword() throws Exception
 	{
 		String expectedRet = Return.EWRONGPASSWD.toString();
-		TestUtility.testFunctionOutput("y\nnour@cs.uh.edu\nreal1234\nn", expectedRet, loginFunc, null);
+		TestUtility.testFunctionOutputError("y\nnour@cs.uh.edu\nreal1234\nn", expectedRet, loginFunc, null);
 	}
 }
