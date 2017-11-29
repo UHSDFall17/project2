@@ -1,6 +1,7 @@
 package eventBrite.UH.DatabaseManager;
 
 import eventBrite.UH.AccountManager.UserInfo;
+import eventBrite.UH.EventTools.EventInputScanner;
 import eventBrite.UH.EventTools.EventTypes;
 
 import java.sql.ResultSet;
@@ -67,51 +68,47 @@ public static UserInfo getUserInfoByUserId(int id) throws SQLException, ClassNot
     return userInfo;
 }
 
-public static EventTypes.Return insertUserIntoDB(UserInfo ui) throws SQLException, ClassNotFoundException {
+public static EventTypes.Return insertUserIntoDB(UserInfo ui){
 
     EventTypes.Return ret = EventTypes.Return.SUCCESS;
 
-    ret = DatabaseHandler.connectToDatabase();
+    try {
 
-    if(!ret.equals(EventTypes.Return.SUCCESS))
-        return ret;
+        ret = DatabaseHandler.connectToDatabase();
 
-    ret = DatabaseHandler.insertIntoTable(ui); //to be added after implementation of attribute getter
 
-    if(!ret.equals(EventTypes.Return.SUCCESS)) {
+        ret = DatabaseHandler.insertIntoTable(ui); //to be added after implementation of attribute getter
 
-        DatabaseHandler.closeConnection();
-        return ret;
+        ret = DatabaseHandler.closeConnection();
     }
-
-    ret = DatabaseHandler.closeConnection();
+    catch (Exception e)
+    {
+        EventTypes.Return.printError(EventTypes.Return.INSERTFAILED);
+        return EventTypes.Return.INSERTFAILED;
+    }
 
     return ret;
 
 }
 
-    public static EventTypes.Return updateUser(UserInfo ui) throws SQLException, ClassNotFoundException {
+    public static EventTypes.Return updateUser(UserInfo ui){
 
         EventTypes.Return ret = EventTypes.Return.SUCCESS;
 
-        ret = DatabaseHandler.connectToDatabase();
-
-        if(!ret.equals(EventTypes.Return.SUCCESS))
-            return ret;
-
         try {
+
+            ret = DatabaseHandler.connectToDatabase();
+
+
             ret = DatabaseHandler.updateTable(ui);
-        } catch (SQLException e) {
-            e.printStackTrace();
+
+            ret = DatabaseHandler.closeConnection();
         }
-
-        if(!ret.equals(EventTypes.Return.SUCCESS)) {
-
-            DatabaseHandler.closeConnection();
-            return ret;
+        catch (Exception e)
+        {
+            EventTypes.Return.printError(EventTypes.Return.UPDATEFAILED);
+            return EventTypes.Return.UPDATEFAILED;
         }
-
-        ret = DatabaseHandler.closeConnection();
 
         return ret;
 
