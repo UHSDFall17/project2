@@ -18,7 +18,9 @@ class EventJoin
 	
 	public Return joinEvent(EventInfo eventInfo)
 	{
-		UserInfo userInfo = Main.getUserAccount().getUserInfo();
+		UserInfo userInfo = null;
+		if(Main.getUserAccount() != null)
+			userInfo = Main.getUserAccount().getUserInfo();
 		RegistrationForm registrationForm = new RegistrationForm(eventInfo);
 		Return ret = fillRegistrationForm(registrationForm, userInfo);
 
