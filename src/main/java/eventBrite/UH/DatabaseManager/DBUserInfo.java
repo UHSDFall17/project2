@@ -18,8 +18,6 @@ public class DBUserInfo {
 
         ret = DatabaseHandler.connectToDatabase();
 
-        if (!ret.equals(EventTypes.Return.SUCCESS))
-            return null;
 
         String request = "select * from UserInfo where email='" + email+"'";
 

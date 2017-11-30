@@ -56,6 +56,7 @@ public class DatabaseHandler {
     }
 
     public static <T extends AttributesGetter> EventTypes.Return insertIntoTable(T obj) throws SQLException {
+
         EventTypes.Return ret = EventTypes.Return.SUCCESS;
         String request = "insert into ";
         String tableName = obj.getClass().getSimpleName();

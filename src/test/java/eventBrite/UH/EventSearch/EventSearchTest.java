@@ -40,6 +40,20 @@ public class EventSearchTest {
     }
 
     @Test
+    public void searchEventTestSearchEmpty() throws FileNotFoundException {
+        DatabaseHandler.setDB("test");
+        DatabaseHandler.setUser("root");
+        Scanner scanner = new Scanner(new FileInputStream("./src/test/testInputs/testsEventSearch/testEventSearch1"));
+        EventInputScanner.setScanner(scanner);
+
+        EventTypes.Return ret = EventTypes.Return.SUCCESS;
+
+        ret = es.searchEvent();
+
+        assertEquals(EventTypes.Return.SUCCESS,ret);
+    }
+
+    @Test
     public void searchEventTestSearchAgain() throws FileNotFoundException {
         DatabaseHandler.setDB("project2");
         DatabaseHandler.setUser("root");

@@ -1,5 +1,6 @@
 package eventBrite.UH.AccountManager;
 
+import eventBrite.UH.DatabaseManager.DatabaseHandler;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,6 +43,8 @@ public class AccountManagerTest {
 	@Test
 	public void testLoginNotExistingAccount() throws Exception 
 	{
+		DatabaseHandler.setDB("project2");
+		DatabaseHandler.setUser("root");
 		String expectedRet = Return.EACCOUNTNOTFOUND.toString();
 		TestUtility.testFunctionOutputError("y\njohn@gmail.com\nazert1234\nN", expectedRet, loginFunc, null);
 	}
@@ -49,6 +52,8 @@ public class AccountManagerTest {
 	@Test
 	public void testLoginWrongEmail() throws Exception 
 	{
+		DatabaseHandler.setDB("project2");
+		DatabaseHandler.setUser("root");
 		String expectedRet = Return.EEMAILFORMAT.toString();
 		TestUtility.testFunctionOutputError("Y\njohnsgmail.com\nazert1234\nN", expectedRet, loginFunc, null);
 	}
@@ -56,6 +61,8 @@ public class AccountManagerTest {
 	@Test
 	public void testLoginWrongPassword() throws Exception
 	{
+		DatabaseHandler.setDB("project2");
+		DatabaseHandler.setUser("root");
 		String expectedRet = Return.EWRONGPASSWD.toString();
 		TestUtility.testFunctionOutputError("y\nnour@cs.uh.edu\nreal1234\nn", expectedRet, loginFunc, null);
 	}
@@ -63,6 +70,8 @@ public class AccountManagerTest {
 	@Test
 	public void testLoginWrongHashFunction() throws Exception
 	{
+		DatabaseHandler.setDB("project2");
+		DatabaseHandler.setUser("root");
 		String expectedRet = Return.EXCEPTIONRAISED.toString();
 		UserInfo userInfo = new UserInfo("FN", "LN", "FN@FN.com", "q");
 		DBUserInfo.insertUserIntoDB(userInfo);
@@ -74,6 +83,8 @@ public class AccountManagerTest {
 	@Test
 	public void testCreateMember() throws Exception
 	{
+		DatabaseHandler.setDB("project2");
+		DatabaseHandler.setUser("root");
 		paramList = new ArrayList<Object>(Arrays.asList(AccountType.MEMBER));
 		UserAccount userAccount = (UserAccount)(TestUtility.getFunctionReturn(
 			"y\nfn\nln\nemailX@x.com\nabc\nabc", signUpFunc, paramList));
@@ -84,6 +95,8 @@ public class AccountManagerTest {
 	@Test
 	public void testCreateExistingMember() throws Exception
 	{
+		DatabaseHandler.setDB("project2");
+		DatabaseHandler.setUser("root");
 		String expectedRet = Return.EACCOUNTEXIST.toString();
 		paramList = new ArrayList<Object>(Arrays.asList(AccountType.MEMBER));
 		TestUtility.testFunctionOutputError("y\nfn\nln\nfekiraafat@gmail.com\nabc\nabc\nn",
@@ -94,6 +107,8 @@ public class AccountManagerTest {
 	@Test
 	public void testCreateMemberWrongEmailFormat() throws Exception
 	{
+		DatabaseHandler.setDB("project2");
+		DatabaseHandler.setUser("root");
 		String expectedRet = Return.EEMAILFORMAT.toString();
 		paramList = new ArrayList<Object>(Arrays.asList(AccountType.MEMBER));
 		TestUtility.testFunctionOutputError("y\nfn\nln\nemail.x.com\nabc\nabc\nn",
@@ -103,6 +118,8 @@ public class AccountManagerTest {
 	@Test
 	public void testCreateMemberWrongPasswordConfirmation() throws Exception
 	{
+		DatabaseHandler.setDB("project2");
+		DatabaseHandler.setUser("root");
 		String expectedRet = Return.EPASSWDMATCH.toString();
 		paramList = new ArrayList<Object>(Arrays.asList(AccountType.MEMBER));
 		TestUtility.testFunctionOutputError("y\nfn\nln\nemailX1@x.com\nabc\nabc2\nn",
@@ -112,6 +129,8 @@ public class AccountManagerTest {
 	@Test
 	public void testCreateMemberHashFunctionException() throws Exception
 	{
+		DatabaseHandler.setDB("project2");
+		DatabaseHandler.setUser("root");
 		String expectedRet = Return.EXCEPTIONRAISED.toString();
 		SignUp userSignUp 	= new SignUp(new PasswordHash(0, 1024));
 
@@ -122,10 +141,24 @@ public class AccountManagerTest {
 						expectedRet, userSignUpfunc, paramList);
 	}
 
+	@Test
+	public void testCreateMemberWrongDB() throws Exception
+	{
+		DatabaseHandler.setDB("project2");
+		DatabaseHandler.setUser("tester");
+		paramList = new ArrayList<Object>(Arrays.asList(AccountType.MEMBER));
+		UserAccount userAccount = (UserAccount)(TestUtility.getFunctionReturn(
+				"y\nfn\nln\nemailtester@x.com\nabc\nabc", signUpFunc, paramList));
+		assertTrue(userAccount.isMember());
+
+	}
+
 // UserAccount Creation
 	@Test
 	public void testCreateGuest() throws Exception
 	{
+		DatabaseHandler.setDB("project2");
+		DatabaseHandler.setUser("root");
 		paramList = new ArrayList<Object>(Arrays.asList(AccountType.GUEST));
 		UserAccount userAccount = (UserAccount)(TestUtility.getFunctionReturn("", signUpFunc, paramList));
 		assertFalse(userAccount.isMember());
@@ -134,6 +167,8 @@ public class AccountManagerTest {
 	@Test
 	public void testCreateOtherThanMemberGuest() throws Exception
 	{
+		DatabaseHandler.setDB("project2");
+		DatabaseHandler.setUser("root");
 		paramList = new ArrayList<Object>(Arrays.asList(AccountType.ADMIN));
 		UserAccount userAccount = (UserAccount)(TestUtility.getFunctionReturn("", signUpFunc, paramList));
 		assertNull(userAccount);
@@ -149,6 +184,8 @@ public class AccountManagerTest {
 	@Test
 	public void testGuestUpdate() throws Exception
 	{
+		DatabaseHandler.setDB("project2");
+		DatabaseHandler.setUser("root");
 		String expectedRet = Return.EINSUFFPRIV.toString();
 		TestUtility.FunctionToTest updateFunc = (ArrayList<Object> list) -> 
 				AccountFactory.getInstance().create(AccountType.GUEST, null).updateProfile();
@@ -159,6 +196,8 @@ public class AccountManagerTest {
 	@Test
 	public void testMemberUpdateWrongInput() throws Exception
 	{
+		DatabaseHandler.setDB("project2");
+		DatabaseHandler.setUser("root");
 		UserInfo userInfo = DBUserInfo.getUserInfoByUserEmail("fekiraafat@gmail.com");
 		MemberAccount memberAccount = new MemberAccount(userInfo);
 
@@ -171,6 +210,8 @@ public class AccountManagerTest {
 	@Test
 	public void testMemberUpdateWrongInput2() throws Exception
 	{
+		DatabaseHandler.setDB("project2");
+		DatabaseHandler.setUser("root");
 		UserInfo userInfo = DBUserInfo.getUserInfoByUserEmail("fekiraafat@gmail.com");
 		MemberAccount memberAccount = new MemberAccount(userInfo);
 
@@ -183,6 +224,8 @@ public class AccountManagerTest {
 	@Test
 	public void testMemberUpdateNewFirstName() throws Exception
 	{
+		DatabaseHandler.setDB("project2");
+		DatabaseHandler.setUser("root");
 		UserInfo userInfo = DBUserInfo.getUserInfoByUserEmail("fekiraafat@gmail.com");
 		MemberAccount memberAccount = new MemberAccount(userInfo);
 
@@ -195,6 +238,8 @@ public class AccountManagerTest {
 	@Test
 	public void testMemberUpdateNewLastName() throws Exception
 	{
+		DatabaseHandler.setDB("project2");
+		DatabaseHandler.setUser("root");
 		UserInfo userInfo = DBUserInfo.getUserInfoByUserEmail("fekiraafat@gmail.com");
 		MemberAccount memberAccount = new MemberAccount(userInfo);
 
@@ -207,6 +252,8 @@ public class AccountManagerTest {
 	@Test
 	public void testMemberUpdateNewEmail() throws Exception
 	{
+		DatabaseHandler.setDB("project2");
+		DatabaseHandler.setUser("root");
 		UserInfo userInfo = DBUserInfo.getUserInfoByUserEmail("fekiraafat@gmail.com");
 		MemberAccount memberAccount = new MemberAccount(userInfo);
 
@@ -220,6 +267,8 @@ public class AccountManagerTest {
 	@Test
 	public void testMemberUpdateNewEmailWrongFormat() throws Exception
 	{
+		DatabaseHandler.setDB("project2");
+		DatabaseHandler.setUser("root");
 		String expectedRet = Return.EEMAILFORMAT.toString();		
 		UserInfo userInfo = DBUserInfo.getUserInfoByUserEmail("fekiraafat@gmail.com");
 		MemberAccount memberAccount = new MemberAccount(userInfo);
@@ -234,6 +283,8 @@ public class AccountManagerTest {
 	@Test
 	public void testMemberUpdateNewPassword() throws Exception
 	{
+		DatabaseHandler.setDB("project2");
+		DatabaseHandler.setUser("root");
 		UserInfo userInfo = DBUserInfo.getUserInfoByUserEmail("fekiraafat@gmail.com");
 		MemberAccount memberAccount = new MemberAccount(userInfo);
 
@@ -250,6 +301,8 @@ public class AccountManagerTest {
 	@Test
 	public void testMemberUpdateNewPasswordWrongHashFunction() throws Exception
 	{
+		DatabaseHandler.setDB("project2");
+		DatabaseHandler.setUser("root");
 		String expectedRet = Return.EXCEPTIONRAISED.toString();		
 		UserInfo userInfo = DBUserInfo.getUserInfoByUserEmail("fekiraafat@gmail.com");
 		MemberAccount memberAccount = new MemberAccount(userInfo);
@@ -266,6 +319,8 @@ public class AccountManagerTest {
 	@Test
 	public void testMemberUpdateNoAvailableOption() throws Exception
 	{
+		DatabaseHandler.setDB("project2");
+		DatabaseHandler.setUser("root");
 		String expectedRet = Return.ENOOPTION.toString();		
 		UserInfo userInfo = DBUserInfo.getUserInfoByUserEmail("fekiraafat@gmail.com");
 		MemberAccount memberAccount = new MemberAccount(userInfo);
@@ -280,6 +335,8 @@ public class AccountManagerTest {
 	@Test
 	public void testMemberUpdateTwoInfo() throws Exception
 	{
+		DatabaseHandler.setDB("project2");
+		DatabaseHandler.setUser("root");
 		UserInfo userInfo = DBUserInfo.getUserInfoByUserEmail("fekiraafat@gmail.com");
 		MemberAccount memberAccount = new MemberAccount(userInfo);
 
@@ -290,11 +347,27 @@ public class AccountManagerTest {
 									updateFunc, paramList);
 	}
 
+	@Test
+	public void testMemberUpdateNewFirstNameWrongDB() throws Exception
+	{
+		DatabaseHandler.setDB("project2");
+		DatabaseHandler.setUser("tester");
+		UserInfo userInfo = DBUserInfo.getUserInfoByUserEmail("fekiraafat@gmail.com");
+		MemberAccount memberAccount = new MemberAccount(userInfo);
+
+		TestUtility.FunctionToTest updateFunc = (ArrayList<Object> list) ->
+				memberAccount.updateProfile();
+		paramList = new ArrayList<Object>();
+		TestUtility.testFunctionReturn("y\n0\nRaafat\nn", Return.UPDATEFAILED, updateFunc, paramList);
+	}
+
 // UserInfo
 
 	@Test
 	public void testGetByNameWrongAttribute() throws Exception
 	{
+		DatabaseHandler.setDB("project2");
+		DatabaseHandler.setUser("root");
 		UserInfo userInfo = new UserInfo("FN", "LN", "fakeEmail@gmail.com", "password");
 		assertEquals(null, userInfo.getByName(""));
 	}
