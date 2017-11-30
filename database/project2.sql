@@ -34,7 +34,7 @@ CREATE TABLE `EventInfo` (
   `eAvailable` int(11) DEFAULT NULL,
   `eReserved` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE `EventInfo` (
 
 LOCK TABLES `EventInfo` WRITE;
 /*!40000 ALTER TABLE `EventInfo` DISABLE KEYS */;
-INSERT INTO `EventInfo` VALUES (48,'test title','test location','2016-01-01 10:00:00','2016-01-01 11:00:00','hello event1',1,26,80,0),(49,'event1','UH','2017-01-02 10:00:00','2017-01-03 10:00:00','this is event1',1,7,20,18),(50,'event3','UH','2017-10-01 10:00:00','2017-10-02 10:00:00','hello event1',1,20,1,0),(51,'event1','UH','2017-01-02 10:00:00','2017-01-03 10:00:00','this is event1',1,7,20,0),(52,'event3','UH','2017-10-01 10:00:00','2017-10-02 10:00:00','hello event1',1,20,1,0),(53,'event1','UH','2017-01-02 10:00:00','2017-01-03 10:00:00','this is event1',1,7,20,0),(54,'event3','UH','2017-10-01 10:00:00','2017-10-02 10:00:00','hello event1',1,20,1,0),(55,'event1','UH','2017-01-02 10:00:00','2017-01-03 10:00:00','this is event1',1,7,20,0),(56,'event3','UH','2017-10-01 10:00:00','2017-10-02 10:00:00','hello event1',1,20,1,0),(57,'event1','UH','2017-01-02 10:00:00','2017-01-03 10:00:00','this is event1',1,7,20,0),(58,'event3','UH','2017-10-01 10:00:00','2017-10-02 10:00:00','hello event1',1,20,1,0),(59,'event1','UH','2017-01-02 10:00:00','2017-01-03 10:00:00','this is event1',1,7,20,0),(60,'event1','UH','2017-01-02 10:00:00','2017-01-03 10:00:00','this is event1',1,7,20,0),(61,'event1','UH','2017-01-02 10:00:00','2017-01-03 10:00:00','this is event1',1,7,20,0),(62,'event3','UH','2017-10-01 10:00:00','2017-10-02 10:00:00','hello event1',1,20,1,0),(63,'event3','UH','2017-10-01 10:00:00','2017-10-02 10:00:00','hello event1',1,20,1,0),(64,'event1','UH','2017-01-02 10:00:00','2017-01-03 10:00:00','this is event1',1,7,20,0),(65,'event3','UH','2017-10-01 10:00:00','2017-10-02 10:00:00','hello event1',1,20,1,0),(66,'event1','UH','2017-01-02 10:00:00','2017-01-03 10:00:00','this is event1',1,7,20,0),(67,'event3','UH','2017-10-01 10:00:00','2017-10-02 10:00:00','hello event1',1,20,1,0),(68,'event1','UH','2017-01-02 10:00:00','2017-01-03 10:00:00','this is event1',1,7,20,0),(69,'event3','UH','2017-10-01 10:00:00','2017-10-02 10:00:00','hello event1',1,20,1,0),(70,'event3','UH','2017-10-01 10:00:00','2017-10-02 10:00:00','hello event1',1,20,1,0),(71,'event1','UH','2017-01-02 10:00:00','2017-01-03 10:00:00','this is event1',1,7,20,0),(73,'event3','UH','2017-10-01 10:00:00','2017-10-02 10:00:00','hello event1',1,20,1,0),(74,'event1','UH','2017-01-02 10:00:00','2017-01-03 10:00:00','this is event1',1,7,20,0),(75,'event3','UH','2017-10-01 10:00:00','2017-10-02 10:00:00','hello event1',1,20,1,0),(76,'event1','UH','2017-01-02 10:00:00','2017-01-03 10:00:00','this is event1',1,7,20,0);
+INSERT INTO `EventInfo` VALUES (52,'test title','test location','2016-01-01 10:00:00','2016-01-01 11:00:00','hello event1',1,26,80,0),(53,'event1','UH','2017-01-02 10:00:00','2017-01-03 10:00:00','this is event1',1,7,20,0),(54,'event3','UH','2017-10-01 10:00:00','2017-10-02 10:00:00','hello event1',1,20,1,0),(55,'event1','UH','2017-01-02 10:00:00','2017-01-03 10:00:00','this is event1',1,7,20,0),(56,'event3','UH','2017-10-01 10:00:00','2017-10-02 10:00:00','hello event1',1,20,1,0),(57,'event1','UH','2017-01-02 10:00:00','2017-01-03 10:00:00','this is event1',1,7,20,0),(58,'event3','UH','2017-10-01 10:00:00','2017-10-02 10:00:00','hello event1',1,20,1,0),(59,'event1','UH','2017-01-02 10:00:00','2017-01-03 10:00:00','this is event1',1,7,20,0),(60,'event1','UH','2017-01-02 10:00:00','2017-01-03 10:00:00','this is event1',1,7,20,0),(61,'event1','UH','2017-01-02 10:00:00','2017-01-03 10:00:00','this is event1',1,7,20,0),(62,'event3','UH','2017-10-01 10:00:00','2017-10-02 10:00:00','hello event1',1,20,1,0),(63,'event3','UH','2017-10-01 10:00:00','2017-10-02 10:00:00','hello event1',1,20,1,0),(64,'event1','UH','2017-01-02 10:00:00','2017-01-03 10:00:00','this is event1',1,7,20,0),(65,'event3','UH','2017-10-01 10:00:00','2017-10-02 10:00:00','hello event1',1,20,1,0),(66,'event1','UH','2017-01-02 10:00:00','2017-01-03 10:00:00','this is event1',1,7,20,0),(67,'event3','UH','2017-10-01 10:00:00','2017-10-02 10:00:00','hello event1',1,20,1,0),(68,'event1','UH','2017-01-02 10:00:00','2017-01-03 10:00:00','this is event1',1,7,20,0),(69,'event3','UH','2017-10-01 10:00:00','2017-10-02 10:00:00','hello event1',1,20,1,0),(70,'event3','UH','2017-10-01 10:00:00','2017-10-02 10:00:00','hello event1',1,20,1,0),(71,'event1','UH','2017-01-02 10:00:00','2017-01-03 10:00:00','this is event1',1,7,20,0),(73,'event3','UH','2017-10-01 10:00:00','2017-10-02 10:00:00','hello event1',1,20,1,0),(74,'event1','UH','2017-01-02 10:00:00','2017-01-03 10:00:00','this is event1',1,7,20,0),(75,'event3','UH','2017-10-01 10:00:00','2017-10-02 10:00:00','hello event1',1,20,1,0),(76,'event1','UH','2017-01-02 10:00:00','2017-01-03 10:00:00','this is event1',1,7,20,0),(77,'event3','UH','2017-10-01 10:00:00','2017-10-02 10:00:00','hello event1',1,20,1,0),(78,'event1','UH','2017-01-02 10:00:00','2017-01-03 10:00:00','this is event1',1,7,20,1),(79,'event3','UH','2017-10-01 10:00:00','2017-10-02 10:00:00','hello event1',1,20,1,0),(80,'event1','UH','2017-01-02 10:00:00','2017-01-03 10:00:00','this is event1',1,7,20,0);
 /*!40000 ALTER TABLE `EventInfo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -62,7 +62,7 @@ CREATE TABLE `UserInfo` (
   `email` text,
   `password` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,7 +71,7 @@ CREATE TABLE `UserInfo` (
 
 LOCK TABLES `UserInfo` WRITE;
 /*!40000 ALTER TABLE `UserInfo` DISABLE KEYS */;
-INSERT INTO `UserInfo` VALUES (1,'nour.smaoui','nour','smaoui','nour@cs.uh.edu','1000:824e6c27f6c5345c4001acd46717cd83:1641bee71cfa3f45');
+INSERT INTO `UserInfo` VALUES (1,'nour.smaoui','nour','smaoui','nour@cs.uh.edu','1000:824e6c27f6c5345c4001acd46717cd83:1641bee71cfa3f45'),(4,'Raafat.Feki','Raafat','Feki','fekiraafat@gmail.com','1000:dc42b52dbdfbb3a65a950872d5600ddf:431cfdb2ea325de4');
 /*!40000 ALTER TABLE `UserInfo` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -84,4 +84,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-28 17:54:06
+-- Dump completed on 2017-11-30  3:30:29
