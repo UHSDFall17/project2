@@ -1,9 +1,13 @@
 #!/bin/bash
 
-mysql -u root -p -e "DROP DATABASE IF EXISTS project2"
-mysql -u root -p  -e "CREATE DATABASE project2"
-mysql -u root -p project2 < ../database/project2.sql
-mysql -u root -p -e "DROP USER IF EXISTS tester"
-mysql -u root -p -e "CREATE USER 'tester'@'%' IDENTIFIED BY 'Project2!'"
-mysql -u root -p -e "GRANT SELECT ON project2.* TO 'tester'@'%'"
+mysql --defaults-extra-file=./database.cnf  -e "DROP DATABASE IF EXISTS project2"
+mysql --defaults-extra-file=./database.cnf  -e "CREATE DATABASE project2"
+mysql --defaults-extra-file=./database.cnf project2 < ../database/project2.sql
+mysql --defaults-extra-file=./database.cnf  -e "DROP DATABASE IF EXISTS test"
+mysql --defaults-extra-file=./database.cnf  -e "CREATE DATABASE test"
+mysql --defaults-extra-file=./database.cnf test < ../database/test.sql
+mysql --defaults-extra-file=./database.cnf -e "DROP USER IF EXISTS tester"
+mysql --defaults-extra-file=./database.cnf -e "CREATE USER 'tester'@'%' IDENTIFIED BY 'Project2!'"
+mysql --defaults-extra-file=./database.cnf -e "GRANT SELECT ON project2.* TO 'tester'@'%'"
+mysql --defaults-extra-file=./database.cnf -e "GRANT SELECT ON test.* TO 'tester'@'%'"
 

@@ -1,3 +1,4 @@
 #!/bin/bash
 
-mysqldump -u root -p project2 > ../database/project2.sql
+mysqldump --defaults-extra-file=./database.cnf project2 > ../database/project2.sql
+mysqldump --defaults-extra-file=./database.cnf test > ../database/test.sql
