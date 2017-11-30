@@ -46,5 +46,14 @@ public abstract class TestUtility
 		EventInputScanner.setScanner(new Scanner(new ByteArrayInputStream(input.getBytes("UTF-8"))));
 		Return actualReturn  = (Return)fnct.execute(paramList);
 		assertEquals(expectedOutput, actualReturn);
-	}	
+	}
+
+	public static Object getFunctionReturn(
+		String input, 
+		FunctionToTest fnct,
+		ArrayList<Object> paramList) throws Exception
+	{
+		EventInputScanner.setScanner(new Scanner(new ByteArrayInputStream(input.getBytes("UTF-8"))));
+		return fnct.execute(paramList);
+	}		
 }

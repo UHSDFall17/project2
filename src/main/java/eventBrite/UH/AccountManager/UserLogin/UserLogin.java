@@ -74,9 +74,10 @@ class UserLogin
 			if(!passwdHash.validatePassword(password, userInfo.getPassword()))
 				return Return.EWRONGPASSWD;
 		}
-		catch (NoSuchAlgorithmException | InvalidKeySpecException e)
+		catch (Exception e)
 		{
 			System.out.println(e);
+			return Return.EXCEPTIONRAISED;
 		}
 
 		return Return.SUCCESS;

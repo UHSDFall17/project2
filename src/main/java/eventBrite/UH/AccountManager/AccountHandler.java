@@ -16,6 +16,7 @@ public class AccountHandler
 	}
 	
 	public PasswordHash getPasswordHash() {return passwdHash;}
+	public void setPasswordHash(PasswordHash newHash) {passwdHash = newHash;}
 	public static AccountHandler getInstance() {return accountHandler;}
 
 	public UserAccount login()
@@ -34,11 +35,14 @@ public class AccountHandler
 		if(accountType == AccountType.GUEST)
 			return accountFactory.create(AccountType.GUEST, null);
 
-		SignUp userSignUp 	= new SignUp(passwdHash);
-		Return ret 			= userSignUp.signUp();
+		if(accountType == AccountType.MEMBER)
+		{
+			SignUp userSignUp 	= new SignUp(passwdHash);
+			Return ret 			= userSignUp.signUp();
 
-		if(ret == Return.SUCCESS)
-			return accountFactory.create(AccountType.MEMBER, userSignUp.getUserInfo());;
+			if(ret == Return.SUCCESS)
+				return accountFactory.create(AccountType.MEMBER, userSignUp.getUserInfo());
+		}
 		
 		return null;
 	}	

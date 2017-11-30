@@ -25,10 +25,6 @@ public class DBUserInfo {
 
         ResultSet rs = DatabaseHandler.selectFromDatabase(request);
 
-        if (rs == null)
-            return null;
-
-
         rs.next();
 
         UserInfo userInfo = generateUserInfoFromResultSet(rs);

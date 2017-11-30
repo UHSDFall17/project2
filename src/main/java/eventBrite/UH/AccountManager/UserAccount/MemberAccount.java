@@ -11,9 +11,12 @@ import java.util.Scanner;
 
 class MemberAccount extends UserAccount
 {
+	private boolean isUpdatedProfile;
+
 	public MemberAccount(UserInfo userInfo)
 	{
 		this.userInfo = userInfo;
+		isUpdatedProfile = false;
 		if(!isMember)
 			isMember = true;
 	}
@@ -22,16 +25,41 @@ class MemberAccount extends UserAccount
 	public void updateEvent() {eventHandler.update(userInfo.getId());}
 	public void deleteEvent() {eventHandler.delete(userInfo.getId());}
 	
-	public void updateProfile() 
+	public Return updateProfile() 
 	{
+		Return ret = Return.RESET;
 		if(EventInputScanner.continueOrReset("Update your profile") == Return.CONTINUE)
-			loadUpdateProfilePage();
-		DBUserInfo.updateUser(userInfo);
+			ret = loadUpdateProfilePage();
+
+		if(ret == Return.EWRONGINPUT)
+			updateProfile();
+
+		if(isUpdatedProfile)
+		{
+			isUpdatedProfile = false;
+			return DBUserInfo.updateUser(userInfo);
+		}
+		return Return.RESET;
 	}
 
-	private void loadUpdateProfilePage()
+	private Return loadUpdateProfilePage()
 	{
-		String value;
+		Return ret = updateProfileFeatures();
+
+		if(ret == Return.EWRONGINPUT)
+			return Return.EWRONGINPUT;
+
+		if(ret != Return.SUCCESS)
+			Return.printError(ret);
+
+		if(EventInputScanner.continueOrReset("Edit another Information") == Return.CONTINUE)
+			ret = loadUpdateProfilePage();
+		return ret;
+	}
+
+	private Return updateProfileFeatures()
+	{
+		String  value;
 		int 	ind = -1;
 		Return 	ret = Return.SUCCESS;
 		Scanner sc 	= EventInputScanner.getScanner();
@@ -45,7 +73,7 @@ class MemberAccount extends UserAccount
 		catch(Exception e)
 		{
 			System.out.println(e);
-			loadUpdateProfilePage();
+			return Return.EWRONGINPUT;
 		}
 		System.out.print("Input the new value of ");	
 
@@ -55,11 +83,13 @@ class MemberAccount extends UserAccount
 				System.out.println("First Name");
 				value = sc.nextLine();
 				userInfo.setFirstname(value);
+				if(!isUpdatedProfile) isUpdatedProfile = true;
 				break;
 			case 1:
 				System.out.println("Last Name");
 				value = sc.nextLine();
 				userInfo.setLastname(value);
+				if(!isUpdatedProfile) isUpdatedProfile = true;
 				break;
 			case 2:
 				System.out.println("E-mail");
@@ -70,6 +100,7 @@ class MemberAccount extends UserAccount
 					break;
 				}
 				userInfo.setEmail(value);
+				if(!isUpdatedProfile) isUpdatedProfile = true;
 				break;
 			case 3:
 				System.out.println("Password");
@@ -78,23 +109,20 @@ class MemberAccount extends UserAccount
 				{
 					value = AccountHandler.getInstance().getPasswordHash().generatePasswordHash(value);
 				}	
-				catch (NoSuchAlgorithmException | InvalidKeySpecException e)
+				catch (Exception e)
 				{	
 					System.out.println(e);
 					ret =  Return.EXCEPTIONRAISED;
 					break;
 				}
 				userInfo.setPassword(value);
+				if(!isUpdatedProfile) isUpdatedProfile = true;
 				break;
 			default:
-				ret = Return.EWRONGINPUT;
+				ret = Return.ENOOPTION;
 				break;
 		}
 
-		if(ret != Return.SUCCESS)
-			Return.printError(ret);
-
-		if(EventInputScanner.continueOrReset("Edit another Information") == Return.CONTINUE)
-			loadUpdateProfilePage();
+		return ret;
 	}
 }

@@ -120,5 +120,13 @@ public class TestMain {
         EventInputScanner.setScanner(scanner);
         Main.main(null);
 
-    }    
+    }
+
+    @Test
+    public void testMainUpdateProfileAsMember() throws FileNotFoundException {
+        Scanner scanner = new Scanner(new FileInputStream("./src/test/testInputs/testsMain/testMain15"));
+        EventInputScanner.setScanner(scanner);
+        Main.main(null);
+
+    }          
 }

@@ -1,6 +1,7 @@
 package eventBrite.UH.AccountManager;
 
 import eventBrite.UH.EventManager.EventHandler;
+import eventBrite.UH.EventTools.EventTypes.Return;
 
 public abstract class UserAccount
 {
@@ -21,5 +22,5 @@ public abstract class UserAccount
 	public abstract void createEvent();
 	public abstract void updateEvent();	
 	public abstract void deleteEvent();
-	public abstract void updateProfile();
+	public abstract Return updateProfile();
 }

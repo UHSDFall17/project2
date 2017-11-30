@@ -31,6 +31,7 @@ class SignUp
 			return signUp();
 		}
 
+
 		if(ret == Return.RESET)
 			reset();
 
@@ -75,13 +76,15 @@ class SignUp
 
 		if(!MailNotifier.checkEmailAddressFormat(email))
 			return Return.EEMAILFORMAT;
+		if(isAccountExist(email))
+			return Return.EACCOUNTEXIST;
 		if(!password.equals(passwordConfirm))
 			return Return.EPASSWDMATCH;
 		try
 		{
 			hashedPassword = passwdHash.generatePasswordHash(password);
 		}	
-		catch (NoSuchAlgorithmException | InvalidKeySpecException e)
+		catch (Exception e)
 		{	
 			System.out.println(e);
 			return Return.EXCEPTIONRAISED;
@@ -89,5 +92,18 @@ class SignUp
 		userInfo = new UserInfo(firstName, lastName, email, hashedPassword);
 		DBUserInfo.insertUserIntoDB(userInfo);
 		return Return.SUCCESS;
-	}	
+	}
+
+	private boolean isAccountExist(String email)
+	{
+		try 
+		{
+			DBUserInfo.getUserInfoByUserEmail(email);
+		} 
+		catch (Exception e) 
+		{
+			return false;
+		}
+		return true;
+	}
 }

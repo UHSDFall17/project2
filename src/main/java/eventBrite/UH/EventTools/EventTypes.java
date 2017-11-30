@@ -47,6 +47,7 @@ public class EventTypes
 		EPASSWDMATCH 		(11, "Passwords don't match"),
 		EWRONGPASSWD 		(12, "Wrong Password"),
 		EACCOUNTNOTFOUND 	(13, "Account Does NOT exist"),
+		EACCOUNTEXIST 		(14, "Account already exist"),
 		// return codes for database handler 21-30
 		CONNECTIONFAILED	(21, "Connection failed"),
 		SELECTFAILED		(22, "Select from table failed"),
@@ -68,7 +69,8 @@ public class EventTypes
 		EWRONGINPUT			(104, "Wrong Input"),
 		EINCOMPLETEREG		(105, "Registration Form is not completely Filled"),
 		ENOEVENT			(106, "No event was selected"),
-		ENOTICKET			(107, "No available tickets");
+		ENOTICKET			(107, "No available tickets"),
+		ENOOPTION			(108, "No available Option");
 
 		private int 	code;
 		private String 	description;
