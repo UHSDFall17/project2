@@ -109,7 +109,7 @@ class EventJoin
 		if(EventInputScanner.continueOrReset("Fill Registration Form") == Return.RESET)
 			return Return.RESET;
 
-		if(userInfo == null || !userInfo.isFullySet())
+		if(userInfo == null)
 		{
 			System.out.println("Enter Your FirstName:");
 			firstName = sc.nextLine();

@@ -80,8 +80,6 @@ public class EventTypes
 			this.description = description;
 		}
 
-		public int getcode() {return code;}
-
 		public String toString()
 		{
 			return description;

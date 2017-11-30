@@ -34,10 +34,10 @@ public class UserInfo implements AttributesGetter
 	public void setEmail(String email)		{this.email = email;}	
 	public void setPassword(String  pWord) 	{this.password = pWord;}
 
-	public boolean isFullySet()
-	{
-		return !(this.firstName.isEmpty() || this.lastName.isEmpty() || this.email.isEmpty());
-	}
+	// public boolean isFullySet()
+	// {
+	// 	return !(this.firstName.isEmpty() || this.lastName.isEmpty() || this.email.isEmpty());
+	// }
 
 	public String toStringUserInfo()
 	{

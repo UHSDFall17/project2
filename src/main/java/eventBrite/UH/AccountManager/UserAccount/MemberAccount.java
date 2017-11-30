@@ -112,8 +112,7 @@ class MemberAccount extends UserAccount
 				catch (Exception e)
 				{	
 					System.out.println(e);
-					ret =  Return.EXCEPTIONRAISED;
-					break;
+					return Return.EXCEPTIONRAISED;
 				}
 				userInfo.setPassword(value);
 				if(!isUpdatedProfile) isUpdatedProfile = true;

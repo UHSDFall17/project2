@@ -4,6 +4,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.Ignore;
+
+import javax.mail.MessagingException;
+
 import static org.junit.Assert.*;
 
 public class MailNotifierTest 
@@ -119,7 +122,16 @@ public class MailNotifierTest
 	public void testMsgIsReadyToSend_SendMail() throws Exception
 	{
 		mailNotif.setSenderInfo("programmincodetest@gmail.com", "Project2");
-		mailNotif.setEmailInfo("fekiraafat@gmail.com", "MailSubject", "MailMsg");
+		mailNotif.setEmailInfo("xxxxxxxx@gmail.com", "MailSubject", "MailMsg");
 		mailNotif.send();
-	}			
-}   
+	}
+
+	@Test(expected = RuntimeException.class)
+	public void testMsgIsReadyToSend_SendMail2() throws Exception
+	{
+		MailNotifier mailNotif1 = new MailNotifier();
+		mailNotif1.setSenderInfo("XXXXXXXXXX@gmail.com", "Project2");
+		mailNotif1.setEmailInfo("fekiraafat@gmail.com", "MailSubject", "MailMsg");
+		mailNotif1.send();
+	}
+}

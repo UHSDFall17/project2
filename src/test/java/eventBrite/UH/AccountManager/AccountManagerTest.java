@@ -169,6 +169,18 @@ public class AccountManagerTest {
 	}
 
 	@Test
+	public void testMemberUpdateWrongInput2() throws Exception
+	{
+		UserInfo userInfo = DBUserInfo.getUserInfoByUserEmail("fekiraafat@gmail.com");
+		MemberAccount memberAccount = new MemberAccount(userInfo);
+
+		TestUtility.FunctionToTest updateFunc = (ArrayList<Object> list) -> 
+													memberAccount.updateProfile();
+		paramList = new ArrayList<Object>();
+		TestUtility.testFunctionReturn("X\ny\nX\nn", Return.RESET, updateFunc, paramList);
+	}
+
+	@Test
 	public void testMemberUpdateNewFirstName() throws Exception
 	{
 		UserInfo userInfo = DBUserInfo.getUserInfoByUserEmail("fekiraafat@gmail.com");
@@ -230,6 +242,9 @@ public class AccountManagerTest {
 		paramList = new ArrayList<Object>();
 		TestUtility.testFunctionReturn("y\n3\nqwerty1234\nn", Return.SUCCESS, 
 							updateFunc, paramList);
+		paramList = new ArrayList<Object>();
+		TestUtility.testFunctionReturn("y\n3\npassword\nn", Return.SUCCESS, 
+							updateFunc, paramList);		
 	}
 
 	@Test
@@ -273,5 +288,14 @@ public class AccountManagerTest {
 		paramList = new ArrayList<Object>();
 		TestUtility.testFunctionReturn("y\n0\nRaafat\ny\n1\nFeki\nn", Return.SUCCESS, 
 									updateFunc, paramList);
-	}	
+	}
+
+// UserInfo
+
+	@Test
+	public void testGetByNameWrongAttribute() throws Exception
+	{
+		UserInfo userInfo = new UserInfo("FN", "LN", "fakeEmail@gmail.com", "password");
+		assertEquals(null, userInfo.getByName(""));
+	}
 }
