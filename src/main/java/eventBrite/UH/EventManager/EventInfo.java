@@ -1,6 +1,5 @@
 package eventBrite.UH.EventManager;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import eventBrite.UH.AccountManager.UserInfo;
 import eventBrite.UH.DatabaseManager.DBEventInfo;
 import eventBrite.UH.DatabaseManager.DBUserInfo;
