@@ -1,7 +1,7 @@
 package eventBrite.UH.EventManager;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import eventBrite.UH.EventTools.EventTypes;
+import eventBrite.UH.DatabaseManager.DatabaseHandler;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -201,6 +201,8 @@ public class EventInfoTest {
     public void testSaveEvent() throws Exception
     {
         EventTypes.Return ret = EventTypes.Return.SUCCESS;
+        DatabaseHandler.setDB("project2");
+        DatabaseHandler.setUser("root");
         ret = eventInfo.SetEventInfos(-1,"event1","UH","01/02/17 - 10:00",
                 "01/03/17 - 10:00","this is event1",1,7,
                 20,0);
