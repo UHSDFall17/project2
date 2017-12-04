@@ -80,7 +80,7 @@ class EventController {
             eInfo.seteOrgId(userId);
 
 
-            System.out.println("Input the event available spots (-1 means unlimited spots)");
+            System.out.println("Input the event available spots");
             intIn=Integer.parseInt(readLine(sc));
             eInfo.seteAvailable(intIn);
 
